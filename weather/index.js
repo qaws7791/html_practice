@@ -1,5 +1,4 @@
-const serviceKey =
-  "76zDuaNaxv5VU7qatyG3Up%2Bs%2F0G3RJPdMO7wuxSLcpiLRYf8fWpNLrXuPv5Y4BCFBdI4empp0S1Vzpr778JznA%3D%3D";
+const serviceKey = "your service key";
 
 let numOfRows = "12"; // 한 페이지 결과 수
 let pageNo = "1"; // 페이지 번호
