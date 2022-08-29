@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+      #variable span {
+        font-family: "Hahmlet", serif;
+        font-size: 5em;
+        animation: 3s infinite variation;
+      }
+
+      @keyframes variation {
+        0% {
+          font-weight: 1;
+        }
+        50% {
+          font-weight: 900;
+        }
+        100% {
+          font-weight: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="variable"></div>
+    <script>
+      var input_text = "안녕하세요 가변글꼴입니다.";
+      var element = document.getElementById("variable");
+      for (i = 0; i < input_text.length; i++) {
+        delay = (i * 3) / input_text.length;
+        var tag = document.createElement("span");
+        var text = document.createTextNode(input_text[i]);
+        tag.appendChild(text);
+        tag.style.animationDelay = delay + "s";
+        console.dir(tag.style.animation);
+
+        element.appendChild(tag);
+      }
+    </script>
+  </body>
+</html>

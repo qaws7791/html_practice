@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #circle_mask {
+        width: 400px;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle r='200' cx='200' cy='200'/%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle r='200' cx='200' cy='200'/%3E%3C/svg%3E");
+      }
+      #airplane {
+        width: 300px;
+        position: absolute;
+        top: 150px;
+        left: 10px;
+        transform: rotate(-25deg);
+        animation: move_airplane 3s ease-in-out 1;
+      }
+
+      @keyframes move_airplane {
+        from {
+          top: 0px;
+          left: 750px;
+        }
+        to {
+          top: 150px;
+          left: 10px;
+        }
+      }
+      @keyframes move_airplane_shadow {
+        from {
+          top: 130px;
+          left: 750px;
+        }
+        to {
+          top: 280px;
+          left: 10px;
+        }
+      }
+
+      #airplane_shadow {
+        width: 300px;
+        position: absolute;
+        top: 280px;
+        left: 10px;
+        transform: rotate(-25deg);
+        animation: move_airplane_shadow 3s ease-in-out 1;
+      }
+      #circle {
+        width: 400px;
+      }
+      .container {
+        display: flex;
+        justify-content: right;
+        width: 800px;
+        border: 8px dashed #afc8cf;
+        padding: 30px;
+      }
+      #airplane_mask {
+        position: absolute;
+        width: 800px;
+        height: 400px;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='600' height='400' style='fill:%23fff;)'%3E%3C/rect%3E%3Ccircle r='200' cx='600' cy='200' fill='%23fff'/%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='600' height='400' style='fill:%23fff;)'%3E%3C/rect%3E%3Ccircle r='200' cx='600' cy='200' fill='%23fff'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="circle_mask">
+        <img src="./sky.jpg" alt="Balloons" id="circle" />
+      </div>
+      <div id="airplane_mask">
+        <img src="./Airplane.png" id="airplane" />
+        <img src="./Airplane_shadow.png" id="airplane_shadow" />
+      </div>
+    </div>
+  </body>
+</html>

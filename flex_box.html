@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .flexbox {
+        width: 400px;
+        height: 400px;
+        background-color: rgb(180, 191, 255);
+      }
+
+      .flexbox > div {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        border-radius: 10px;
+        border: 1px dotted black;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="flexbox" style="display: flex; justify-content: center">
+      <div>First</div>
+      <div>Second</div>
+      <div>Third</div>
+    </section>
+  </body>
+</html>

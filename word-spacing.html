@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #wrapper {
+        width: 200px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px dashed navy;
+      }
+      #box_word_spacing {
+        width: 200px;
+        text-align: center;
+        animation: 3s infinite variation-letter-spacing;
+      }
+      @keyframes variation-letter-spacing {
+        0% {
+          word-spacing: 0em;
+        }
+        50% {
+          word-spacing: 0.3em;
+        }
+        100% {
+          word-spacing: 0em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="box_word_spacing">
+        <p>
+          Far out in the uncharted backwaters of the unfashionable end of the
+          western spiral arm of the Galaxy lies a small unregarded yellow sun.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

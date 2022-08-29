@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #column-container {
+        min-width: 400px;
+        border: 2px dashed skyblue;
+        padding: 20px;
+
+        column-count: 1;
+        column-gap: 1%;
+        column-width: 100px;
+        column-rule: solid 2px skyblue;
+      }
+      #all-column {
+        column-span: all;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label for="columns">Columns (between 1 and 10):</label>
+      <input
+        type="range"
+        id="columns"
+        name="columns"
+        min="1"
+        max="10"
+        value="1"
+      />
+      <span id="show-columns">1 columns</span>
+    </div>
+    <div>
+      <label for="gaps">Gaps (between 1 and 10):</label>
+      <input type="range" id="gaps" name="gaps" min="1" max="50" value="1" />
+      <span id="show-gaps">1%</span>
+    </div>
+
+    <div id="column-container">
+      <h2 id="all-column">Multi-columns Layout</h2>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quos
+      placeat totam modi amet odit fugiat officia ullam distinctio fuga incidunt
+      maxime, eaque quae dolorem nostrum, dolorum facere. Reiciendis, deleniti!
+      Excepturi asperiores esse quas quaerat dolor soluta nam, voluptatibus odio
+      sed. Cumque debitis eum nobis, culpa, reprehenderit excepturi sequi rem
+      accusantium ratione eaque at consequatur ipsum! Omnis iste ex expedita.
+      Saepe accusamus soluta cupiditate. Id necessitatibus magnam voluptate, ab
+      iste reprehenderit eos ut ullam minima aut tenetur excepturi officiis
+      corrupti, recusandae iusto quidem obcaecati ipsa quaerat provident
+      praesentium. Obcaecati, similique. Aperiam veniam, laudantium incidunt
+      natus assumenda sapiente laborum nesciunt doloribus expedita
+      necessitatibus nisi dolorum nobis repellat dignissimos, iste accusamus
+      labore alias quod dolorem odit ullam nihil modi perspiciatis. Laboriosam,
+      explicabo.
+    </div>
+    <script>
+      var container = document.getElementById("column-container");
+      var columns = document.getElementById("columns");
+      var gaps = document.getElementById("gaps");
+      var show_columns = document.getElementById("show-columns");
+      var show_gaps = document.getElementById("show-gaps");
+
+      columns.oninput = function () {
+        container.style.columnCount = this.value;
+        show_columns.innerText = this.value + " columns";
+      };
+      gaps.oninput = function () {
+        container.style.columnGap = this.value + "%";
+        show_gaps.innerText = this.value + "%";
+      };
+    </script>
+  </body>
+</html>

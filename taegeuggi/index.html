@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*33.67deg*/
+      /*sin 101.694 */
+      /*cos 152.542*/
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: cornflowerblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .paper {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        width: 600px;
+        height: 400px;
+        background-color: white;
+      }
+      /* .paper::before {
+        content: "";
+        position: absolute;
+        width: 700px;
+        height: 1px;
+        transform: rotate(33.69deg);
+        border-top: 2px dashed #000;
+      }
+      .paper::after {
+        content: "";
+        position: absolute;
+        width: 700px;
+        height: 1px;
+        transform: rotate(-33.69deg);
+        border-top: 2px dashed #000;
+      }
+      .bigcircle {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border: 2px dashed #000;
+        border-radius: 50%;
+      } */
+      .circle {
+        width: 200px;
+        height: 200px;
+        background-color: #c60c30;
+        border-bottom: 100px solid #003478;
+        box-sizing: border-box;
+        border-radius: 50%;
+        position: relative;
+        transform: rotate(33.69006753deg);
+        z-index: 10;
+      }
+
+      .circle::before {
+        content: "";
+        width: 100px;
+        height: 100px;
+        background-color: #c60c30;
+        position: absolute;
+        top: 50%;
+        border-radius: 50%;
+      }
+      .circle::after {
+        content: "";
+        width: 100px;
+        height: 100px;
+        background-color: #003478;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        border-radius: 50%;
+      }
+      .grid {
+        display: flex;
+        width: 100px;
+        height: 66.666px;
+        position: absolute;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .grid > div {
+        background-color: #000;
+        height: 16.666px;
+      }
+      .long {
+        width: 100px;
+        height: 16.666px;
+      }
+      .short {
+        width: 45.8px;
+        height: 16.666px;
+      }
+      .sky {
+        transform: translateX(-152.542px) translateY(-101.694px)
+          rotate(123.69deg);
+      }
+      .earth {
+        transform: translateX(-152.542px) translateY(+101.694px)
+          rotate(-123.69deg);
+      }
+      .water {
+        transform: translateX(+152.542px) translateY(-101.694px)
+          rotate(-123.69deg);
+      }
+      .fire {
+        transform: translateX(+152.542px) translateY(+101.694px)
+          rotate(123.69deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper">
+      <div class="circle"></div>
+      <div class="bigcircle"></div>
+
+      <div class="sky grid">
+        <div class="long"></div>
+        <div class="long"></div>
+        <div class="long"></div>
+      </div>
+
+      <div class="earth grid">
+        <div class="long"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="long"></div>
+      </div>
+
+      <div class="water grid">
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="long"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+      </div>
+
+      <div class="fire grid">
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+        <div class="short"></div>
+      </div>
+    </div>
+  </body>
+</html>
