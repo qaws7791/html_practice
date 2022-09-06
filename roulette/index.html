@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
+    <title>roulette</title>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      h3 {
-        text-transform: capitalize;
-      }
-      .InputContainer > input {
-        display: block;
-      }
-    </style>
+    <script src="src/index.js"></script>
   </head>
   <body onload="load()">
+    <h1>roulette using canvas</h1>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
     <div class="slideContainer">
+      Power:
       <input
         type="range"
         min="1"
@@ -25,24 +19,27 @@
         id="myRange"
       />
       <label for="myRange" id="labelRange">5</label>
-      <button type="button" id="buttonRange">Start!</button>
+      <button type="button" id="buttonRange" class="roul">Start!</button>
     </div>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
     <div class="rouletteContainer">
       <h3>current angle: <strong id="currentAngle">0</strong></h3>
       <h3>result angle: <strong id="resultAngle"></strong></h3>
       <h3>result number: <strong id="resultNumber"></strong></h3>
+      <button id="buttonAdd" class="roul">Add</button>
+      <button id="buttonDelete" class="roul">Delete</button>
     </div>
     <script>
-      var range;
-      var labelRange;
-      var buttonRange;
-      var currentAngle;
-      var resultAngle;
-      var resultNumber;
-      var roulette;
-      var ctx;
-      var inputContainer;
+      let labelRange;
+      let range;
+      let buttonRange;
+      let currentAngle;
+      let resultAngle;
+      let resultNumber;
+      let roulette;
+      let ctx;
+      let inputContainer;
+      let buttonAdd;
+      let buttonDelete;
 
       function load() {
         ctx = document.getElementById("myCanvas").getContext("2d");
@@ -53,21 +50,35 @@
         resultAngle = document.getElementById("resultAngle");
         resultNumber = document.getElementById("resultNumber");
         inputContainer = document.getElementById("inputContainer");
+        buttonAdd = document.getElementById("buttonAdd");
+        buttonDelete = document.getElementById("buttonDelete");
         roulette = new Roulette();
-        roulette.createInput();
+
+        roulette.initInput();
         range.oninput = function () {
           labelRange.innerText = range.value;
         };
         buttonRange.onclick = function () {
           roulette.velocity = range.value;
+          changeInputState(true);
         };
+        changeInputState = function (bool) {
+          let input_elements = document.getElementsByClassName("roul");
+          for (let i = 0; i < input_elements.length; i++) {
+            console.log(input_elements[i]);
+            input_elements[i].disabled = bool;
+          }
+        };
+        roulette.connectButton(buttonAdd, "Add");
+        roulette.connectButton(buttonDelete, "Delete");
         Update();
       }
 
       function Roulette() {
+        this.isMove = false;
         this.current_angle = 0;
         this.velocity = 0;
-        this.items = ["A", "B", "C", "D", "E"];
+        this.items = ["1번", "2번", "3번", "4번"];
         this.colors = [
           "#f94144",
           "#f3722c",
@@ -81,43 +92,98 @@
           "#277da1",
         ];
 
-        this.createInput = function () {
-          let Inputs = document.createElement("form");
-          Inputs.setAttribute("class", "InputContainer");
-          for (let i = 0; i < this.items.length; i++) {
-            let newInput = document.createElement("input");
-            newInput.setAttribute("type", "text");
-            newInput.setAttribute("name", "input_" + i);
-            newInput.setAttribute("id", "input_" + i);
-            newInput.setAttribute("value", this.items[i]);
-            newInput.setAttribute("size", 10);
-            newInput.setAttribute("maxlength", 8);
-            newInput.oninput = function (e) {
-              console.log(e.target.id.slice(6), e.target.value);
-              this.items[i] = e.value;
+        this.connectButton = function (button, rule) {
+          let that = this;
+          if (rule === "Add") {
+            button.onclick = function () {
+              let len = that.items.length;
+              if (len < 16) {
+                that.items.push((len + 1).toString() + "번");
+                document.body.appendChild(that.addInput(len));
+              }
             };
-            Inputs.appendChild(newInput);
+          } else if (rule === "Delete") {
+            button.onclick = function () {
+              let len = that.items.length;
+              if (len < 3) {
+                console.log("더 이상 삭제할 수 없습니다.");
+                return 0;
+              }
+              console.log(that.items.pop() + "번째 item Delete");
+              document.body.removeChild(document.body.lastChild);
+            };
           }
-          document.body.appendChild(Inputs);
+        };
+
+        this.addInput = function (i) {
+          let that = this;
+          let newInput = document.createElement("input");
+          newInput.setAttribute("type", "text");
+          newInput.setAttribute("name", "input" + i);
+          newInput.setAttribute("class", "roul");
+          newInput.setAttribute("value", that.items[i]);
+          newInput.setAttribute("size", 10);
+          newInput.setAttribute("maxlength", 5);
+          newInput.oninput = function (e) {
+            console.log(that.items);
+            that.items[i] = e.target.value;
+          };
+          return newInput;
+        };
+
+        this.initInput = function () {
+          let that = this;
+          for (let i = 0; i < that.items.length; i++) {
+            document.body.appendChild(that.addInput(i));
+          }
         };
 
         this.animate = function () {
-          if (this.velocity > 0.01) this.velocity -= 0.01;
-          else {
+          if (this.velocity > 0.01) {
+            this.isMove = true;
+            this.velocity -= 0.01;
+            this.current_angle += this.velocity;
+            if (this.current_angle > 360) this.current_angle -= 360;
+            else if (this.current_angle < -360) this.current_angle += 360;
+            currentAngle.innerText = parseInt(this.current_angle);
+            this.draw(360 / this.items.length);
+          } else {
             //when stopped
+            this.isMove = false;
+            changeInputState(false);
             this.velocity = 0;
             resultAngle.innerText = parseInt(this.current_angle);
             resultNumber.innerText =
-              this.items.length -
-              parseInt(this.current_angle / (360 / this.items.length));
+              this.items[
+                this.items.length -
+                  1 -
+                  parseInt(this.current_angle / (360 / this.items.length))
+              ];
           }
-          this.current_angle += this.velocity;
-          if (this.current_angle > 360) this.current_angle -= 360;
-          else if (this.current_angle < -360) this.current_angle += 360;
-          currentAngle.innerText = this.current_angle;
           this.draw(360 / this.items.length);
         };
+
         this.draw = function (angle) {
+          ctx.beginPath();
+          ctx.moveTo(300, 500);
+          ctx.lineTo(350, 550);
+          ctx.lineTo(250, 550);
+          ctx.lineTo(300, 500);
+          ctx.fillStyle = "skyblue";
+          ctx.strokeStyle = "pink";
+          ctx.stroke();
+          ctx.fill();
+          ctx.closePath();
+          ctx.beginPath();
+          ctx.arc(300, 300, 220, 0 * (Math.PI / 180), 360 * (Math.PI / 180));
+          ctx.fill();
+          ctx.moveTo(300, 300);
+          ctx.arc(300, 300, 202, 0 * (Math.PI / 180), 360 * (Math.PI / 180));
+
+          ctx.lineWidth = 4;
+          ctx.stroke();
+
+          ctx.closePath();
           for (let i = 0; i < this.items.length; i++) {
             //arc
             ctx.beginPath();
@@ -130,7 +196,7 @@
               (-90 + this.current_angle + angle * (i + 1)) * (Math.PI / 180),
               false
             );
-            ctx.fillStyle = this.colors[i];
+            ctx.fillStyle = this.colors[i % this.colors.length];
             ctx.fill();
             ctx.closePath();
 
@@ -141,18 +207,21 @@
               (-90 + this.current_angle + angle * (i + 0.5)) * (Math.PI / 180)
             );
             ctx.fillStyle = "black";
-            ctx.fillText(this.items[i], 60, 10);
+            ctx.fillText(this.items[i], 60, 5);
             ctx.rotate(
               -(-90 + this.current_angle + angle * (i + 0.5)) * (Math.PI / 180)
             );
             ctx.translate(-300, -300);
           }
           ctx.beginPath();
-          ctx.moveTo(290, 80);
-          ctx.lineTo(310, 80);
+          //ctx.moveTo(290, 80);
+          ctx.moveTo(310, 82);
           ctx.lineTo(300, 110);
-          ctx.fillStyle = "blue";
+          ctx.lineTo(290, 82);
+          ctx.fillStyle = "skyblue";
+          ctx.strokeStyle = "pink";
           ctx.fill();
+          ctx.stroke();
           ctx.closePath();
         };
       }

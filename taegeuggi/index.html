@@ -49,7 +49,7 @@
         border: 2px dashed #000;
         border-radius: 50%;
       } */
-      .circle {
+      .paper .circle {
         width: 200px;
         height: 200px;
         background-color: #c60c30;
@@ -61,7 +61,7 @@
         z-index: 10;
       }
 
-      .circle::before {
+      .paper .circle::before {
         content: "";
         width: 100px;
         height: 100px;
@@ -70,7 +70,7 @@
         top: 50%;
         border-radius: 50%;
       }
-      .circle::after {
+      .paper .circle::after {
         content: "";
         width: 100px;
         height: 100px;
@@ -80,7 +80,7 @@
         right: 0;
         border-radius: 50%;
       }
-      .grid {
+      .paper .grid {
         display: flex;
         width: 100px;
         height: 66.666px;
@@ -88,31 +88,31 @@
         flex-wrap: wrap;
         gap: 8px;
       }
-      .grid > div {
+      .paper .grid > div {
         background-color: #000;
         height: 16.666px;
       }
-      .long {
+      .paper .long {
         width: 100px;
         height: 16.666px;
       }
-      .short {
+      .paper .short {
         width: 45.8px;
         height: 16.666px;
       }
-      .sky {
+      .paper .sky {
         transform: translateX(-152.542px) translateY(-101.694px)
           rotate(123.69deg);
       }
-      .earth {
+      .paper .earth {
         transform: translateX(-152.542px) translateY(+101.694px)
           rotate(-123.69deg);
       }
-      .water {
+      .paper .water {
         transform: translateX(+152.542px) translateY(-101.694px)
           rotate(-123.69deg);
       }
-      .fire {
+      .paper .fire {
         transform: translateX(+152.542px) translateY(+101.694px)
           rotate(123.69deg);
       }
