@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      button {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid rgb(95, 123, 206);
+        font-size: 32px;
+        color: black;
+        text-transform: uppercase;
+        background-color: rgb(255, 255, 255);
+        transition: background-color 0.5s;
+      }
+
+      main {
+        display: inline-block;
+        position: relative;
+      }
+
+      button:hover {
+        background-color: rgb(54, 87, 187);
+      }
+
+      #reStartButton {
+        display: none;
+      }
+    </style>
+    <script src="script.js"></script>
+  </head>
+  <body onload="load()">
+    <main>
+      <canvas id="myCanvas" width="900" height="600"></canvas>
+      <button type="button" id="startButton">Start</button>
+      <button type="button" id="reStartButton">ReStart</button>
+    </main>
+  </body>
+</html>
