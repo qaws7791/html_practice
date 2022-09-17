@@ -1,0 +1,167 @@
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+li {
+    list-style-type: none;
+}
+
+nav {
+    width: 100%;
+    background: #fff;
+    position: fixed;
+}
+
+nav .nav_container {
+
+    display: flex;
+    justify-content: space-between;
+    
+    border-bottom: 1px solid #ccc;
+}
+
+
+nav .logo {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+nav .logo strong {
+    font-weight: bold;
+}
+
+nav .menu {
+    display: flex;
+    align-items: center;
+}
+
+nav .menu ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+nav .menu ul li  {
+    
+    padding: 20px 30px;
+    font-size: 15px;
+    
+}
+
+nav .menu ul li:hover {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+nav .menu ul li a {
+    color: #4e5968;
+}
+
+
+main {
+    padding-top: 80px;
+    display: flex;
+    grid-template-columns: 25fr 50fr 25fr;
+}
+
+main section h2 {
+    font-size: 14px;
+    color: #8b95a1;
+}
+main section {
+    width: 50%;
+    padding: 40px 80px;
+}
+
+main section ul {
+    padding: 0;
+}
+
+main section ul li {
+    margin-top: 80px;
+}
+
+main section ul li img {
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+main section ul li span {
+    display: block;
+    font-size: 15px;
+    color: #8b95a1;
+    margin-bottom: 15px;
+}
+
+main section ul li h4 {
+    font-size: 32px;
+    color: #333d4b;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+main section ul li p {
+    font-size: 16px;
+    color: #4e5968;
+    margin-bottom: 10px;
+}
+
+main section ul li time {
+    font-size: 15px;
+    color: #8b95a1;
+}
+
+
+main aside {
+    position: sticky;
+    top:80px;
+    
+    height: calc(100vh - 76px);
+    padding: 0 80px;
+    width: 25%;
+}
+
+main aside ul {
+    padding: 0;
+    overflow: scroll;
+    height: calc(100vh - 76px);
+
+    overflow-x: hidden;
+    
+}
+
+main aside ul li {
+    margin-top: 80px;
+}
+
+main aside ul li img {
+    border-radius: 20px;
+    margin-bottom: 20px;
+    max-width: 350px;
+}
+
+main aside ul li span {
+    display: block;
+    font-size: 15px;
+    color: #8b95a1;
+    margin-bottom: 15px;
+}
+
+main aside ul li h4 {
+    font-size: 32px;
+    color: #333d4b;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+main aside ul li p {
+    font-size: 16px;
+    color: #4e5968;
+    margin-bottom: 10px;
+}
+
+main aside ul li time {
+    font-size: 15px;
+    color: #8b95a1;
+}
