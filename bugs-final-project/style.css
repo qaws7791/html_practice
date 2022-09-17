@@ -1,0 +1,350 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    border: none;
+  }
+
+  :root {
+    --blue--color: #3040c4;
+    --white--color: #fff;
+    --gray--color: #f4f5f7;
+  }
+  
+  button {
+    font-size: 18px;
+    font-weight: bold;
+    width: 160px;
+    height: 56px;
+    border-radius: 2px;
+  }
+
+  em {
+      font-weight: bold;
+  }
+
+  body {
+    font-family: "DM Sans", sans-serif;
+    color: #2B292D;
+  }
+
+  .desc {
+    font-family: DM Sans;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
+
+  .landing-section {
+    width: 100%;
+    height: 568px;
+    background-color: #fdded8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .landing-section__container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing-section__item {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .landing-section__item:last-child {
+    margin-bottom: 0px;
+  }
+  .landing-section__title {
+    font-size: 70px;
+    font-weight: bold;
+  }
+
+  .landing-section__desc {
+    margin: 0 auto;
+  }
+
+  
+  .apply-button {
+    background-color: var(--blue--color);
+    color: var(--white--color);
+  }
+  .learn-more-button {
+    background-color: var(--white--color);
+    color: var(--blue--color);
+  }
+
+  .service-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gray--color);
+    height: 340px;
+  }
+
+  .service-section__container {
+    display: flex;
+  }
+
+  .service-section__item {
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+  }
+
+  .service-section__item:first-child {
+    margin-right: 110px;
+  }
+
+  .service-section__item_width_450 {
+    width: 450px;
+  }
+  .service-section__title {
+    font-family: DM Sans;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: -0.04em;
+    text-align: left;
+  }
+
+  .service-section__desc {
+  }
+
+  .program-section__container{
+      display: flex;
+      flex-direction: column;
+  }
+
+
+
+  .program-section__category {
+      color: #009b4d;
+      font-family: DM Sans;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      margin-top: 80px;
+      margin-bottom: 16px;
+
+  }
+
+  .program-section__title{
+      font-family: DM Sans;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 56px;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 32px;
+      width: 40%;
+
+  }
+
+  .program-section__desc{
+      text-align: center;
+      margin-bottom: 72px;
+      width: 55%;
+  }
+  .program-section__item {
+      display: flex;
+      justify-content: center;
+  }
+  .programs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 96px;
+  }
+
+  .programs-container {
+      display: flex;
+  }
+
+  .program {
+      display: flex;
+      flex-direction: column;
+      width: 290px;
+      height: 299px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 1e-05) 100%), #FFFFFF;
+      background-blend-mode: overlay, normal;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-right: 30px;
+
+  }
+
+  .program:last-child {
+      margin-right: 0px;
+  }
+
+
+  .program__image{
+      height: 195px;
+      object-fit: contain;
+      margin: 24px;
+      
+
+  }
+
+  .program__title {
+      font-family: DM Sans;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: -0.02em;
+      text-align: center;
+  }
+
+  .program_blue {
+      background-color: var(--blue--color);
+  }
+
+  .program_blue .program__title {
+      color: var(--white--color);
+  }
+
+  .curriculum-section{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+  }
+
+  .curriculum-section__main {
+      display: flex;
+      margin-top: 80px;
+  }
+
+  .curriculum-section__item {
+      width: 450px;
+  }
+
+  .curriculum-section__item:first-child{
+      margin-right: 30px;
+  }
+  .curriculum-section__catogory{
+      font-family: DM Sans;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      text-align: left;
+      color: #0189d1;
+
+  }
+
+  .curriculum-section__title{
+      font-family: DM Sans;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 56px;
+      letter-spacing: -0.03em;
+      text-align: left;
+      
+  }
+
+  .curriculum-section__desc{
+  }
+
+  .curriculum-section_button{
+      background-color: var(--blue--color);
+      color: var(--white--color);
+  }
+
+  .curriculum-section__image{
+      width: 450px;
+      object-fit: contain;
+  }
+
+
+  .curriculum-section__features {
+      width: 930px;
+      display: flex;
+      margin-bottom: 96px;
+  }
+  .features__feature{
+      font-family: DM Sans;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 26px;
+      letter-spacing: -0.01em;
+      text-align: left;
+  }
+
+  .subscription-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F2F8FA;
+  }
+
+  .subscription-section__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 0px;
+  }
+
+  .subscription-section__banner {
+      width: 370px;
+      height: 300px;
+      margin-right: 30px;
+  }
+  .subscription-section__image{
+      height: 285px;
+  }
+
+  .subscription-section__title{
+      font-family: DM Sans;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 40px;
+      letter-spacing: -0.05em;
+      text-align: left;
+      margin-bottom: 16px;
+
+  }
+
+  .subscription-section__desc{
+      width: 530px;
+      margin-bottom: 24px;
+  }
+
+
+  .form__email{
+      width: 362px;
+      height: 24px;
+      font-family: DM Sans;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      text-align: left;
+      border: none;
+      margin: 0 8px 4px 0;
+      padding: 16px;
+
+  }
+
+  .form__button{
+      color: var(--white--color);
+      background-color: var(--blue--color);
+  }
+
+  .form__desc{
+      text-align: left;
+      color: #7B7B7E;
+  }
+
+  .link {
+      color: #3040C4;
+  }

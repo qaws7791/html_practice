@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="load()">
+    <canvas id="myCanvas" width="900" height="600"></canvas>
+    <h1></h1>
+    <script>
+      canvas = document.getElementById("myCanvas");
+      ctx = canvas.getContext("2d");
+      text = document.querySelector("h1");
+      canvas.height = 500;
+      canvas.width = 400;
+      let raf;
+      let start;
+      let count = 0;
+      function load() {
+        start = new Date();
+        startUpdate();
+      }
+      function draw() {
+        console.log("draw");
+        count += 1;
+        let end = new Date();
+        if (end - start >= 1000) {
+          console.log(count);
+          text.innerText = count;
+          start = new Date();
+          count = 0;
+        }
+      }
+
+      function update() {
+        draw();
+        raf = window.requestAnimationFrame(update); //다음 프레임을 위한 호출
+      }
+
+      function startUpdate() {
+        raf = window.requestAnimationFrame(update); // 애니메이션 시작
+      }
+
+      function stopUpdate() {
+        window.cancelAnimationFrame(raf); //애니메이션 중지
+      }
+    </script>
+  </body>
+</html>
