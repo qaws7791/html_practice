@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+      }
+
+      ul,
+      li {
+        list-style: none;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .main {
+        position: sticky;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        transition: transform 1s ease-in-out;
+      }
+
+      
+
+      .main > section {
+        display: block;
+        min-width: 100%;
+        height: 100vh;
+        line-height: 100vh;
+        text-align: center;
+      }
+
+      section {
+        font-size: 10vw;
+        color: aliceblue;
+      }
+
+      .section1 {
+        background: radial-gradient(
+          circle,
+          rgba(184, 53, 51, 1) 0%,
+          rgba(233, 149, 148, 1) 100%
+        );
+      }
+
+      .section2 {
+        background: radial-gradient(
+          circle,
+          rgba(168, 155, 3, 1) 0%,
+          rgba(197, 233, 148, 1) 100%
+        );
+      }
+
+      .section3 {
+        background: radial-gradient(
+          circle,
+          rgba(89, 168, 3, 1) 0%,
+          rgba(165, 233, 148, 1) 100%
+        );
+      }
+      .section4 {
+        background: radial-gradient(
+          circle,
+          rgba(3, 164, 168, 1) 0%,
+          rgba(148, 233, 211, 1) 100%
+        );
+      }
+      .section5 {
+        background: radial-gradient(
+          circle,
+          rgba(22, 3, 168, 1) 0%,
+          rgba(172, 148, 233, 1) 100%
+        );
+      }
+      .section6 {
+        background: radial-gradient(
+          circle,
+          rgba(161, 3, 168, 1) 0%,
+          rgba(213, 103, 181, 1) 69%
+        );
+      }
+
+      
+    </style>
+  </head>
+  <body>
+
+    <main class="main" data-0="transform:translateX(0%);"data-1000="transform:translateX(-500%);">
+      <section class="section1">첫 번째 섹션입니다.</section>
+      <section class="section2">두 번째 섹션입니다.</section>
+      <section class="section3">세 번째 섹션입니다.</section>
+      <section class="section4">네 번째 섹션입니다.</section>
+      <section class="section5">다섯 번째 섹션입니다.</section>
+      <section class="section6">여섯 번째 섹션입니다.</section>
+    </main>
+    
+
+    <script type="text/javascript" src="skrollr.js"></script>
+	<script type="text/javascript">
+	var s = skrollr.init();
+	</script>
+  </body>
+</html>
