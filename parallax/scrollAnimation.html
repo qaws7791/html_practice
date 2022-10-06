@@ -134,7 +134,9 @@
         left: 70px;
         opacity: 0;
       }
-      .animate {
+      .animate,
+      .grow-img,
+      .animate_down {
         animation: fadeIn 1s forwards ease-in;
         transition: 2s ease-in-out;
       }
@@ -158,7 +160,121 @@
         transform: translateX(3em);
       }
       /* features */
+      .features {
+        background: #f0f0f0;
+        padding: 81px 0;
+      }
+      .features .item {
+        text-align: center;
+      }
+      .features .item img {
+        width: 0;
+        height: 0;
+      }
+      .features .item img.grow-img {
+        width: 169px;
+        height: 169px;
+      }
+      .features .item h4 {
+        font-size: 30px;
+        color: #2c2f36;
+        margin-top: 15px;
+        text-transform: uppercase;
+        opacity: 0;
+      }
       /* location */
+
+      .location {
+        position: relative;
+      }
+      .stripes {
+        display: flex;
+      }
+      .stripes .stripe {
+        width: 10%;
+        height: 0;
+      }
+      .stripes .stripe.animate_down {
+        height: 512px;
+      }
+      #s1 {
+        background: #2c2f36;
+        transition-delay: 0.1s;
+      }
+      #s2 {
+        background: #444850;
+        transition-delay: 0.2s;
+      }
+      #s3 {
+        background: #36383c;
+        transition-delay: 0.3s;
+      }
+      #s4 {
+        background: #1e2026;
+        transition-delay: 0.4s;
+      }
+      #s5 {
+        background: #444850;
+        transition-delay: 0.5s;
+      }
+      #s6 {
+        background: #2b2d30;
+        transition-delay: 0.6s;
+      }
+      #s7 {
+        background: #212326;
+        transition-delay: 0.7s;
+      }
+      #s8 {
+        background: #36383c;
+        transition-delay: 0.8s;
+      }
+      #s9 {
+        background: #444850;
+        transition-delay: 0.9s;
+      }
+      #s10 {
+        background: #2c2f36;
+        transition-delay: 1s;
+      }
+
+      .location .contents {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 155px 0 120px;
+      }
+      .location .map {
+        position: relative;
+      }
+      #location_map {
+        margin-left: 90px;
+      }
+      #location_rader {
+        position: absolute;
+        left: 140px;
+        top: -40px;
+        animation: rotation 10s infinite linear;
+      }
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .contents h2 {
+        font-size: 40px;
+        margin-bottom: 30px;
+        color: #fff;
+      }
+      .contents p {
+        font-size: 28px;
+        line-height: 37px;
+        color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -209,18 +325,18 @@
       </div>
     </section>
     <section class="features">
-      <h2 class="hiddeen">features</h2>
+      <h2 class="hidden">features</h2>
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 item">
             <img src="images/feature_icon_speed.png" alt="speed" />
             <h4>speed</h4>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 item">
             <img src="images/feature_icon_support.png" alt="support" />
             <h4>support</h4>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 item">
             <img src="images/feature_icon_smart.png" alt="smart" />
             <h4>smart</h4>
           </div>
@@ -239,8 +355,6 @@
         <div class="stripe" id="s8"></div>
         <div class="stripe" id="s9"></div>
         <div class="stripe" id="s10"></div>
-        <div class="stripe" id="s11"></div>
-        <div class="stripe" id="s12"></div>
       </div>
       <div class="container contents">
         <div class="row">
@@ -258,5 +372,31 @@
         </div>
       </div>
     </section>
+    <script>
+      const device = document.querySelector(".device");
+      const features = document.querySelector(".features");
+      const stripes = document.querySelector(".stripes");
+      const offset = 800;
+      window.onscroll = function () {
+        if (device.getBoundingClientRect().top < offset) {
+          device.querySelectorAll("img").forEach((img) => {
+            img.classList.add("animate");
+          });
+        }
+        if (features.getBoundingClientRect().top < offset) {
+          features.querySelectorAll("img").forEach((img) => {
+            img.classList.add("grow-img");
+          });
+          features.querySelectorAll("h4").forEach((img) => {
+            img.classList.add("animate");
+          });
+        }
+        if (stripes.getBoundingClientRect().top < offset) {
+          stripes.querySelectorAll(".stripe").forEach((stripe) => {
+            stripe.classList.add("animate_down");
+          });
+        }
+      };
+    </script>
   </body>
 </html>
