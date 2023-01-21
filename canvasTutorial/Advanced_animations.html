@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer}
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        .stage{
+            position: relative;
+        }
+
+        .canvasWapper{
+            position: relative;
+        }
+        #canvas {
+            box-shadow: 29px 29px 56px 5px rgba(117,117,117,0.89);
+            border-radius: 10px;
+            position: relative;
+        }
+        button {
+            color: lightsteelblue;
+            display: inline-block;
+            display: block;
+            bottom:0;
+            right: 0;
+            margin: 15px;
+            border:lightsteelblue 1px solid;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .inputs {
+            position: absolute;
+            right: 0px;
+            bottom: 0;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:flex-end;
+        }
+        .totalCount {
+            position: absolute;
+            right: 20px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="canvasWapper">
+            <canvas id="canvas" width="480" height="800">           
+            </canvas>
+            <p class="totalCount">TOTAL:</p>
+            <div class="inputs">
+                <button onclick="initBall();">RANDOM</button>
+                <button onclick="addBall();">ADD BALL</button>
+                <button onclick="addText();">ADD TEXT</button>
+                <button onclick="deleteBall();">DELETE ITEM</button>
+
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+    
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var count;
+        var countItem = document.getElementsByClassName("totalCount")[0];
+        var raf;
+        var balls =[];
+        var colors = [
+        "#D2E1FF",
+        "#A0A0FF",
+        "#8C8CF5",
+        "#3CA0FF",
+        "#9DF0E1",
+        "#73EAA8",
+        "#61F3EB",
+        "#FFD4DF",
+        "#FFDFDC",
+        "#FFBEF5",
+        "#FFA6CF",
+        "#FDF5DC",
+        "#FAEBD7",
+        "#F5D08A",
+        "#FFBB8C",
+        "#FABCBC",
+        "#F4A0A0",
+        "#EBACAC",
+        "#D78E8E",
+        "#E782FF",
+        "#dda0dd",
+        "#C65FF9"
+        ];
+
+        function changeCount(){
+            count = balls.length;
+            countItem.innerHTML = "TOTAL: " + count;
+        }
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function createBall(x,y,vx,vy,radius,color){
+            console.log("createBall");
+            return{
+                x:x,
+                y:y,
+                vx:vx,
+                vy:vy,
+                width:radius,
+                height:radius,
+                radius:radius,
+                color:color,
+                draw: function() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                    ctx.closePath();
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+        }
+
+        function createText(x,y,vx,vy,radius,color){
+            return{
+                x:x,
+                y:y,
+                vx:vx,
+                vy:vy,
+                width:150,
+                height:40,
+                color:color,
+                draw: function() {
+                    ctx.font = "48px serif";
+                    ctx.textBaseline = "hanging";
+                    ctx.fillStyle = this.color;
+                    ctx.fillText("Hello", this.x, this.y);
+                }
+            }
+        }
+            
+        function initBall(){
+            balls = [];
+            for (var i=0; i<10; i++){
+                balls[i]= 
+                createBall(
+                    parseInt(getRandomArbitrary(0,480)),
+                    parseInt(getRandomArbitrary(0,800)),
+                    parseInt(getRandomArbitrary(1,7)),
+                    parseInt(getRandomArbitrary(1,7)),
+                    parseInt(getRandomArbitrary(30,50)),
+                    colors[parseInt(getRandomArbitrary(0,colors.length))]
+                    );
+                
+            }
+            for (var i=10; i<20; i++){
+                balls[i]= 
+                createText(
+                    parseInt(getRandomArbitrary(0,480-150)),
+                    parseInt(getRandomArbitrary(0,800-40)),
+                    parseInt(getRandomArbitrary(1,7)),
+                    parseInt(getRandomArbitrary(1,7)),
+                    parseInt(getRandomArbitrary(30,50)),
+                    colors[parseInt(getRandomArbitrary(0,colors.length))]
+                    );
+                
+            }
+            changeCount();
+            
+        }
+        function addText(){
+            balls.push(createText(
+                parseInt(getRandomArbitrary(0,480)),
+                parseInt(getRandomArbitrary(0,800-40)),
+                parseInt(getRandomArbitrary(1,7)),
+                parseInt(getRandomArbitrary(1,7)),
+                parseInt(getRandomArbitrary(30,50)),
+                colors[parseInt(getRandomArbitrary(0,colors.length))]
+                ));
+                changeCount();
+            console.log("ADD Text!");
+        }
+
+        function addBall(){
+            balls.push(createBall(
+                parseInt(getRandomArbitrary(0,480-50)),
+                parseInt(getRandomArbitrary(0,800-40)),
+                parseInt(getRandomArbitrary(1,7)),
+                parseInt(getRandomArbitrary(1,7)),
+                parseInt(getRandomArbitrary(30,50)),
+                colors[parseInt(getRandomArbitrary(0,colors.length))]
+                ));
+            changeCount();
+            console.log("ADD Text!");
+        }
+
+
+        function deleteBall(){
+            if(balls.length){
+                balls.pop();
+                changeCount();
+                console.log("delete BALL!");
+            }
+            
+            
+        }
+        
+
+        function clear() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+          }
+
+        function draw(ball) {
+            
+            ball.draw();
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+           
+            if (ball.y + ball.vy + ball.height > canvas.height || ball.y + ball.vy < 0) {
+                ball.vy = -ball.vy;
+              }
+            if (ball.x + ball.vx + ball.width > canvas.width || ball.x + ball.vx < 0) {
+            ball.vx = -ball.vx;
+            }
+            //ball.vy *= .99;
+            //ball.vy += .25;
+          }
+          function animate() {
+            
+              for (var i=0; i<balls.length; i++){
+                  draw(balls[i]);
+              }
+              clear();
+              raf = window.requestAnimationFrame(animate);
+          }
+
+          
+          
+          canvas.addEventListener('click', function(e) {
+            
+          });
+
+        initBall();
+        animate();
+    </script>
+</body>
+</html>

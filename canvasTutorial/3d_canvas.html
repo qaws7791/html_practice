@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      main {
+        display: flex;
+        border: 2px dashed #000;
+      }
+      .stage {
+        perspective: 600px;
+        margin: 60px;
+      }
+      .input_box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 30px;
+      }
+      #canvas {
+        transform-style: preserve-3d;
+        transform: rotateX(30deg);
+      }
+    </style>
+  </head>
+  <body onload="draw();">
+    <h1>3D ROTATION</h1>
+    <main>
+      <div class="stage">
+        <canvas id="canvas" width="300" height="300"></canvas>
+      </div>
+      <div class="input_box">
+        <h2>Input Box</h2>
+        <p>rotate X: <output id="xValue">0</output></p>
+        <input
+          type="range"
+          name="rotateX"
+          id="rotateX"
+          min="0"
+          max="360"
+          step="1"
+          value="0"
+          oninput="changeTransfrom(this.value,'x');"
+        />
+        <p>rotate Y: <output id="yValue">0</output></p>
+        <input
+          type="range"
+          name="rotateY"
+          id="rotateY"
+          min="0"
+          max="360"
+          step="1"
+          value="0"
+          oninput="changeTransfrom(this.value,'y');"
+        />
+        <p>rotate Z: <output id="zValue">0</output></p>
+        <input
+          type="range"
+          name="rotateZ"
+          id="rotateZ"
+          min="0"
+          max="360"
+          step="1"
+          value="0"
+          oninput="changeTransfrom(this.value,'z');"
+        />
+      </div>
+    </main>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const xValue = document.getElementById("xValue");
+      const yValue = document.getElementById("yValue");
+      const zValue = document.getElementById("zValue");
+      const inputX = document.getElementById("rotateX");
+      const inputY = document.getElementById("rotateY");
+      const inputZ = document.getElementById("rotateZ");
+      let rotateValue = { x: 0, y: 0, z: 0 };
+      function draw() {
+        if (canvas.getContext) {
+          var ctx = canvas.getContext("2d");
+          for (var i = 0; i < 7; i++) {
+            var x = 0 + i * 50;
+            var y = 300;
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          }
+          for (var i = 0; i < 7; i++) {
+            var x = 300;
+            var y = 0 + i * 50;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      function changeTransfrom(value, axis) {
+        rotateValue[axis] = Number(value);
+        canvas.style.transform = `rotateX(${rotateValue["x"]}deg) rotateY(${rotateValue["y"]}deg) rotateZ(${rotateValue["z"]}deg)`;
+        xValue.textContent = rotateValue["x"];
+        yValue.textContent = rotateValue["y"];
+        zValue.textContent = rotateValue["z"];
+      }
+    </script>
+  </body>
+</html>

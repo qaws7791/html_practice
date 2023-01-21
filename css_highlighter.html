@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      del {
+        text-decoration: line-through;
+        background-color: #fbb;
+        color: #555;
+      }
+
+      ins {
+        text-decoration: none;
+        background-color: #d4fcbc;
+      }
+
+      blockquote {
+        padding-left: 15px;
+        border-left: 3px solid #d7d7db;
+        font-size: 1rem;
+      }
+      del::before,
+      del::after {
+        clip-path: inset(100%);
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+
+      del::before {
+        content: " [제거 부분 시작] ";
+      }
+
+      del::after {
+        content: " [제거 부분 끝] ";
+      }
+    </style>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <blockquote>
+      There is <del>nothing</del> <ins>no code</ins> either good or bad, but
+      <del>thinking</del> <ins>running it</ins> makes it so.
+    </blockquote>
+    <img alt="" src="twat.raw" />
+  </body>
+</html>

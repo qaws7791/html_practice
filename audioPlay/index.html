@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Untitled Document</title>
+    <style>
+      .button {
+        border: none;
+        width: 50px;
+        height: 50px;
+      }
+      .button_play {
+        background: url("play.svg");
+      }
+      .button_pause {
+        background: url("pause.svg");
+      }
+      .button_stop {
+        background: url("stop.svg");
+      }
+      .button_mute {
+        background: url("mute_off.svg");
+      }
+      .mute_on {
+        background: url("mute_on.svg");
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        margin: 0px 0;
+      }
+      input[type="range"]:focus {
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        box-shadow: 3.3px 3.3px 2.3px rgba(0, 0, 0, 0.55),
+          0px 0px 3.3px rgba(13, 13, 13, 0.55);
+        background: #c9c9fe;
+        border-radius: 15px;
+        border: 2.8px solid #f2ffff;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        box-shadow: 3.2px 3.2px 1.7px rgba(0, 0, 0, 0.57),
+          0px 0px 3.2px rgba(13, 13, 13, 0.57);
+        border: 3.5px solid rgba(0, 0, 0, 0.19);
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        background: #aeaaff;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -2.8px;
+      }
+      input[type="range"]:focus::-webkit-slider-runnable-track {
+        background: #d3d3fe;
+      }
+      input[type="range"]::-moz-range-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        box-shadow: 3.3px 3.3px 2.3px rgba(0, 0, 0, 0.55),
+          0px 0px 3.3px rgba(13, 13, 13, 0.55);
+        background: #c9c9fe;
+        border-radius: 15px;
+        border: 2.8px solid #f2ffff;
+      }
+      input[type="range"]::-moz-range-thumb {
+        box-shadow: 3.2px 3.2px 1.7px rgba(0, 0, 0, 0.57),
+          0px 0px 3.2px rgba(13, 13, 13, 0.57);
+        border: 3.5px solid rgba(0, 0, 0, 0.19);
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        background: #aeaaff;
+        cursor: pointer;
+      }
+      input[type="range"]::-ms-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      input[type="range"]::-ms-fill-lower {
+        background: #bfbffe;
+        border: 2.8px solid #f2ffff;
+        border-radius: 30px;
+        box-shadow: 3.3px 3.3px 2.3px rgba(0, 0, 0, 0.55),
+          0px 0px 3.3px rgba(13, 13, 13, 0.55);
+      }
+      input[type="range"]::-ms-fill-upper {
+        background: #c9c9fe;
+        border: 2.8px solid #f2ffff;
+        border-radius: 30px;
+        box-shadow: 3.3px 3.3px 2.3px rgba(0, 0, 0, 0.55),
+          0px 0px 3.3px rgba(13, 13, 13, 0.55);
+      }
+      input[type="range"]::-ms-thumb {
+        box-shadow: 3.2px 3.2px 1.7px rgba(0, 0, 0, 0.57),
+          0px 0px 3.2px rgba(13, 13, 13, 0.57);
+        border: 3.5px solid rgba(0, 0, 0, 0.19);
+        width: 30px;
+        border-radius: 15px;
+        background: #aeaaff;
+        cursor: pointer;
+        height: 30px;
+      }
+      input[type="range"]:focus::-ms-fill-lower {
+        background: #c9c9fe;
+      }
+      input[type="range"]:focus::-ms-fill-upper {
+        background: #d3d3fe;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="button button_play" onclick="audioPlay();"></button>
+    <button class="button button_pause" onclick="audioPause();"></button>
+    <button class="button button_stop" onclick="audioStop();"></button>
+    <button class="button button_mute" onclick="audioMute();"></button>
+    <p>Time:</p>
+    <p class="audioTime">time</p>
+    <input
+      class="progress"
+      type="range"
+      value="0"
+      min="0"
+      max="100"
+      onchange="progress_change();"
+    />
+    <script>
+      var bgm_url =
+        "http://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3";
+      var bgm = new Audio(bgm_url);
+      const audioTime = document.getElementsByClassName("audioTime")[0];
+      const progress = document.getElementsByClassName("progress")[0];
+      const button_mute = document.getElementsByClassName("button_mute")[0];
+      let isMute = false;
+
+      function audioPlay() {
+        bgm.currentTime = progress.value;
+        progress.max = bgm.duration;
+        bgm.play();
+      }
+      bgm.addEventListener("timeupdate", (event) => {
+        audioTime.innerHTML = Math.floor(bgm.currentTime);
+        document.getElementsByClassName("progress")[0].value = bgm.currentTime;
+      });
+      function audioPause() {
+        bgm.pause();
+      }
+      function audioStop() {
+        bgm.pause();
+        bgm.currentTime = 0;
+        progress.value = 0;
+      }
+      function audioMute() {
+        isMute = !isMute;
+        button_mute.classList.toggle("mute_on");
+        bgm.muted = isMute;
+      }
+      function progress_change() {
+        audioTime.innerHTML = progress.value;
+      }
+    </script>
+  </body>
+</html>

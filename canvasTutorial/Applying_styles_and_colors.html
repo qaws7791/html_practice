@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        canvas { border: 1px solid black; }
+        p {display: block;}
+        canvas {display: inline-block;}
+      </style>
+</head>
+<body onload="draw();">
+
+    <canvas id="tutorial" width="150" height="150"></canvas>
+    <p>fillStyle = color
+        도형을 채우는 색을 설정합니다.</p>
+    <p>strokeStyle = color
+        도형의 윤곽선 색을 설정합니다.</p>
+    <canvas id="tutorial2" width="150" height="150"></canvas>
+    <p>
+        globalAlpha = transparencyValue
+        // 외곽선과 채움 스타일에 투명 적용 
+        ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+        ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    </p>
+    <canvas id="tutorial3" width="150" height="150"></canvas>
+    <canvas id="tutorial4" width="150" height="150"></canvas>
+    <p>lineWidth = value
+        이후 그려질 선의 두께를 설정합니다.</p>
+    <p>lineCap = type
+        선의 끝 모양을 설정합니다.</p>
+    <p>lineJoin = type
+        선들이 만나는 "모서리"의 모양을 설정합니다.</p>
+    <p>miterLimit = value
+        두 선이 예각으로 만날 때 접합점의 두께를 제어할 수 있도록, 연결부위의 크기를 제한하는 값을 설정합니다.</p>
+    <p>getLineDash()
+        음수가 아닌 짝수를 포함하는 현재 선의 대시 패턴 배열을 반환합니다.</p>
+    <p>setLineDash(segments)
+        현재 선의 대시 패턴을 설정합니다.</p>
+    <p>lineDashOffset = value
+        선의 대시 배열이 어디서 시작될지 지정합니다.</p>
+    <canvas id="tutorial5" width="150" height="150"></canvas>
+    <p>lineCap</p>
+    <p>butt
+        선의 끝이 좌표에 딱맞게 잘립니다.</p>
+    <p>round
+        선의 끝이 동그랗습니다.</p>
+    <p>square
+        선 끝에, 선 두께 반만큼의 사각형 영역이 더해집니다.</p>
+    <canvas id="tutorial6" width="150" height="150"></canvas>
+    <p>lineJoin</p>
+    <p>round
+        도형의 모서리를, 연결되는 부분들의 공통 끝점을 중심으로 하는 원 모양으로 만듭니다. 이때 원의 반지름은 선의 두께와 같습니다.</p>
+    <p>bevel
+        도형의 모서리를, 연결되는 부분들의 공통 끝점에서 세모 모양으로 만듭니다.</p>
+    <p>miter
+        도형의 모서리를, 두 부분의 바깥쪽 테두리 선을 각각 연장하여 교차된 점으로 생긴 마름모꼴 모양으로 만듭니다. miterLimit 속성값에 따라 모양이 달라집니다.</p>
+    <canvas id="tutorial7" width="150" height="150"></canvas>
+    <p>miterLimit</p>
+    <input type="text" id="miterLimit" value="1">
+    <button onclick="draw();">Submit</button>
+    <canvas id="tutorial8" width="150" height="150"></canvas>
+    <p>대시라인 사용하기</p>
+    <p>setLineDash 메소드와 lineDashOffset 속성은 선의 대시 패턴을 지정합니다. </p>
+    <p>setLineDash 메소드는 거리를 지정하는 숫자 목록을 받아 선과 틈을 교대로 그리며</p>
+    <p>lineDashOffset 속성은 패턴을 시작할 위치를 오프셋으로 설정합니다.</p>
+    <canvas id="tutorial9" width="150" height="150"></canvas>
+    <p>createLinearGradient(x1, y1, x2, y2)
+        시작점 좌표를 (x1, y1)로 하고, 종료점 좌표를 (x2, y2)로 하는 선형 그라디언트 오브젝트를 생성합니다.</p>
+    <p>createRadialGradient(x1, y1, r1, x2, y2, r2)
+        반지름이 r1이고 좌표 (x1, y1)을 중심으로 하는 원과, 반지름이 r2이고 좌표 (x2, y2)를 중심으로 하는 원을 사용하여 그라디언트가 생성됩니다.</p>
+    <p>gradient.addColorStop(position, color)
+        gradient 오브젝트에 새로운 색 중단점(color stop)을 생성합니다. position은 0.0에서 1.0 사이의 숫자이고 그라디언트에서 색상의 상대적인 위치를 정의합니다. color 인자는 CSS <color>를 나타내는 문자열이어야하고, 그라디언트가 (전환효과로) 진행되면서 도달한 지점의 색상을 의미합니다.</p>
+	<canvas id="tutorial10
+	" width="150" height="150"></canvas>
+	
+
+
+
+
+    <script>
+
+        var offset = 0;
+
+
+        function draw_dot() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.setLineDash([4, 2]);
+            ctx.lineDashOffset = -offset;
+            ctx.strokeRect(10, 10, 100, 100);
+        }
+
+        function march() {
+        offset++;
+        if (offset > 16) {
+            offset = 0;
+        }
+        draw_dot();
+        setTimeout(march, 20);
+        }
+
+        function draw(){
+            var canvas = document.getElementById('tutorial');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                for (var i = 0; i < 6; i++){
+                    for (var j = 0; j < 6; j++){
+                      ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ', ' +
+                                       Math.floor(255 - 42.5 * j) + ', 0)';
+                      ctx.fillRect(j*25,i*25,25,25);
+                    }
+                  }
+
+                
+            }
+            var canvas = document.getElementById('tutorial2');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                for (var i = 0; i < 6; i++) {
+                    for (var j = 0; j < 6; j++) {
+                      ctx.strokeStyle = 'rgb(0, ' + Math.floor(255 - 42.5 * i) + ', ' + 
+                                       Math.floor(255 - 42.5 * j) + ')';
+                      ctx.beginPath();
+                      ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, Math.PI * 2, true);
+                      ctx.stroke();
+                    }
+                  }
+                
+            }
+
+            var canvas = document.getElementById('tutorial3');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                // 배경을 그린다
+                ctx.fillStyle = '#FD0';
+                ctx.fillRect(0, 0, 75, 75);
+                ctx.fillStyle = '#6C0';
+                ctx.fillRect(75, 0, 75, 75);
+                ctx.fillStyle = '#09F';
+                ctx.fillRect(0, 75, 75, 75);
+                ctx.fillStyle = '#F30';
+                ctx.fillRect(75, 75, 75, 75);
+                ctx.fillStyle = '#FFF';
+
+                // 투명값을 설정한다
+                ctx.globalAlpha = 0.2;
+
+                // 반투명한 원을 그린다
+                for (var i = 0; i < 7; i++){
+                    ctx.beginPath();
+                    ctx.arc(75, 75, 10 + 10 * i, 0, Math.PI * 2, true);
+                    ctx.fill();
+                }
+                
+            }
+
+            var canvas = document.getElementById('tutorial4');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                // 배경을 그린다
+                ctx.fillStyle = 'rgb(255,221,0)';
+                ctx.fillRect(0,0,150,37.5);
+                ctx.fillStyle = 'rgb(102,204,0)';
+                ctx.fillRect(0,37.5,150,37.5);
+                ctx.fillStyle = 'rgb(0,153,255)';
+                ctx.fillRect(0,75,150,37.5);
+                ctx.fillStyle = 'rgb(255,51,0)';
+                ctx.fillRect(0,112.5,150,37.5);
+
+                // 반투명한 사각형을 그린다
+                for (var i=0;i<10;i++){
+                    ctx.fillStyle = 'rgba(255,255,255,'+(i+1)/10+')';
+                    for (var j=0;j<4;j++){
+                    ctx.fillRect(5+i*14,5+j*37.5,14,27.5)
+                    }
+                }
+                
+            }
+
+            var canvas = document.getElementById('tutorial5');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                for (var i = 0; i < 10; i++){
+                    ctx.lineWidth = 1 + i;
+                    ctx.beginPath();
+                    ctx.moveTo(5 + i * 14, 5);
+                    ctx.lineTo(5 + i * 14, 140);
+                    ctx.stroke();
+                  }
+                
+            }
+            var canvas = document.getElementById('tutorial6');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                var lineCap = ['butt','round','square'];
+
+                // 안내선을 그린다
+                ctx.strokeStyle = '#09f';
+                ctx.beginPath();
+                ctx.moveTo(10, 10);
+                ctx.lineTo(140, 10);
+                ctx.moveTo(10, 140);
+                ctx.lineTo(140, 140);
+                ctx.stroke();
+
+                // 선을 그린다
+                ctx.strokeStyle = 'black';
+                for (var i=0;i<lineCap.length;i++){
+                    ctx.lineWidth = 15;
+                    ctx.lineCap = lineCap[i];
+                    ctx.beginPath();
+                    ctx.moveTo(25 + i * 50, 10);
+                    ctx.lineTo(25 + i * 50,140);
+                    ctx.stroke();
+                }
+                
+            }
+            var canvas = document.getElementById('tutorial7');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                var lineJoin = ['round', 'bevel', 'miter'];
+                ctx.lineWidth = 10;
+                for (var i=0;i<lineJoin.length;i++){
+                    ctx.lineJoin = lineJoin[i];
+                    ctx.beginPath();
+                    ctx.moveTo(-5, 5 + i * 40);
+                    ctx.lineTo(35, 45 + i * 40);
+                    ctx.lineTo(75, 5 + i * 40);
+                    ctx.lineTo(115, 45 + i * 40);
+                    ctx.lineTo(155, 5 + i * 40);
+                    ctx.stroke();
+                }
+                
+            }
+            var canvas = document.getElementById('tutorial8');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+                // 캔버스를 비운다
+                ctx.clearRect(0,0,150,150);
+                
+                // 안내선을 그린다
+                ctx.strokeStyle = '#09f';
+                ctx.lineWidth   = 2;
+                ctx.strokeRect(-5,50,160,50);
+                
+                // 선 스타일을 설정한다
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 10;
+                
+                // 입력 값을 검사한다
+                if (document.getElementById('miterLimit').value.match(/\d+(\.\d+)?/)) {
+                    ctx.miterLimit = parseFloat(document.getElementById('miterLimit').value);
+                } else {
+                    alert('Value must be a positive number');
+                }
+                
+                // 선을 그린다
+                ctx.beginPath();
+                ctx.moveTo(0,100);
+                for (i=0;i<24;i++){
+                    var dy = i%2==0 ? 25 : -25 ;
+                    ctx.lineTo(Math.pow(i,1.5)*2,75+dy);
+                }
+                ctx.stroke();
+                return false;
+                
+			}
+            
+            var canvas = document.getElementById('tutorial9').getContext('2d');
+            march();
+            
+
+            
+			
+			
+			var ctx = document.getElementById('tutorial10').getContext('2d');
+
+			// 그레이디언트를 생성한다
+			var lingrad = ctx.createLinearGradient(0, 0, 0, 150);
+			lingrad.addColorStop(0, '#00ABEB');
+			lingrad.addColorStop(0.5, '#fff');
+			lingrad.addColorStop(0.5, '#26C000');
+			lingrad.addColorStop(1, '#fff');
+
+			var lingrad2 = ctx.createLinearGradient(0, 50, 0, 95);
+			lingrad2.addColorStop(0.5, '#000');
+			lingrad2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+			// 외곽선과 채움 스타일에 그레이디언트를 적용한다
+			ctx.fillStyle = lingrad;
+			ctx.strokeStyle = lingrad2;
+			
+			// 도형을 그린다
+			ctx.fillRect(10, 10, 130, 130);
+			ctx.strokeRect(50, 50, 50, 50);
+            
+
+        }
+        
+        
+        
+        
+       
+
+    </script>
+</body>
+</html>

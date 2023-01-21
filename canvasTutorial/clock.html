@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        canvas {  }
+        p {display: block;}
+        canvas {display: inline-block;}
+      </style>
+</head>
+<body onload="init();">
+
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <p>createLinearGradient(x1, y1, x2, y2)
+        시작점 좌표를 (x1, y1)로 하고, 종료점 좌표를 (x2, y2)로 하는 선형 그라디언트 오브젝트를 생성합니다.</p>
+    <p>createRadialGradient(x1, y1, r1, x2, y2, r2)
+        반지름이 r1이고 좌표 (x1, y1)을 중심으로 하는 원과, 반지름이 r2이고 좌표 (x2, y2)를 중심으로 하는 원을 사용하여 그라디언트가 생성됩니다.</p>
+    <p>gradient.addColorStop(position, color)
+        gradient 오브젝트에 새로운 색 중단점(color stop)을 생성합니다. position은 0.0에서 1.0 사이의 숫자이고 그라디언트에서 색상의 상대적인 위치를 정의합니다. color 인자는 CSS <color>를 나타내는 문자열이어야하고, 그라디언트가 (전환효과로) 진행되면서 도달한 지점의 색상을 의미합니다.</p>
+
+	
+
+
+
+
+    <script>
+        function init(){
+            clock();
+            setInterval(clock,1000);
+          }
+          
+          function clock(){
+            var now = new Date();
+            var ctx = document.getElementById('canvas').getContext('2d');
+            ctx.save();
+            ctx.clearRect(0,0,150,150);
+            ctx.translate(75,75);
+            ctx.scale(0.4,0.4);
+            ctx.rotate(-Math.PI/2);
+            ctx.strokeStyle = "black";
+            ctx.fillStyle = "white";
+            ctx.lineWidth = 8;
+            ctx.lineCap = "round";
+          
+            // 시계판 - 시
+            ctx.save();
+            for (var i=0;i<12;i++){
+              ctx.beginPath();
+              ctx.rotate(Math.PI/6);
+              ctx.moveTo(100,0);
+              ctx.lineTo(120,0);
+              ctx.stroke();
+            }
+            ctx.restore();
+          
+            // 시계판 - 분
+            ctx.save();
+            ctx.lineWidth = 5;
+            for (i=0;i<60;i++){
+              if (i%5!=0) {
+                ctx.beginPath();
+                ctx.moveTo(117,0);
+                ctx.lineTo(120,0);
+                ctx.stroke();
+              }
+              ctx.rotate(Math.PI/30);
+            }
+            ctx.restore();
+            
+            var sec = now.getSeconds();
+            var min = now.getMinutes();
+            var hr  = now.getHours();
+            hr = hr>=12 ? hr-12 : hr;
+          
+            ctx.fillStyle = "black";
+          
+            // 시간 표시 - 시
+            ctx.save();
+            ctx.rotate( hr*(Math.PI/6) + (Math.PI/360)*min + (Math.PI/21600)*sec )
+            ctx.lineWidth = 14;
+            ctx.beginPath();
+            ctx.moveTo(-20,0);
+            ctx.lineTo(80,0);
+            ctx.stroke();
+            ctx.restore();
+          
+            // 시간 표시 - 분
+            ctx.save();
+            ctx.rotate( (Math.PI/30)*min + (Math.PI/1800)*sec )
+            ctx.lineWidth = 10;
+            ctx.beginPath();
+            ctx.moveTo(-28,0);
+            ctx.lineTo(112,0);
+            ctx.stroke();
+            ctx.restore();
+            
+            // 시간 표시 - 초
+            ctx.save();
+            ctx.rotate(sec * Math.PI/30);
+            ctx.strokeStyle = "#D40000";
+            ctx.fillStyle = "#D40000";
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(-30,0);
+            ctx.lineTo(83,0);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0,0,10,0,Math.PI*2,true);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(95,0,10,0,Math.PI*2,true);
+            ctx.stroke();
+            ctx.fillStyle = "rgba(0,0,0,0)";
+            ctx.arc(0,0,3,0,Math.PI*2,true);
+            ctx.fill();
+            ctx.restore();
+          
+            ctx.beginPath();
+            ctx.lineWidth = 14;
+            ctx.strokeStyle = '#325FA2';
+            ctx.arc(0,0,142,0,Math.PI*2,true);
+            ctx.stroke();
+          
+            ctx.restore();
+          }
+        
+        
+       
+
+    </script>
+</body>
+</html>

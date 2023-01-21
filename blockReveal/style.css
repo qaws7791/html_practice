@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+
+h1 {
+    color: white;
+    margin-bottom: 30px;
+}
+
+section
+{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;  
+}
+
+div.card
+{   position: relative;
+    width: 5%;
+    height: 5%;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+    border: 1px solid #68a1d3 ;
+}
+div.x {
+    transform:rotateY(180deg);
+}
+
+.front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(image2.jpg);
+    backface-visibility: hidden;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+
+
+    overflow: hidden;
+}
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #68a1d3 ;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    
+}

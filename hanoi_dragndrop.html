@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            min-width: 600px;
+            display: flex;
+        }
+        #draggable {
+            height: 30px;
+            text-align: center;
+          }
+        
+          .dropzone {
+            display: flex;
+            flex-direction:column-reverse;
+            align-items: center;
+            width: 33.33333333%;
+            height: 400px;
+            background-color: rgb(255, 189, 131);
+            margin: 10px 5px;
+            padding: 10px;
+            border-radius: 20px;
+          }
+
+          .eight {
+            width: 90%;
+            background: rgb(18, 0, 29);
+          }
+
+          .seven {
+            width: 80%;
+            background: rgb(139, 19, 219);
+          }
+
+          .six {
+            width: 70%;
+            background: rgb(34, 0, 126);
+          }
+
+          .five {
+            width: 60%;
+            background: rgb(25, 54, 223);
+          }
+
+          .four {
+            width: 50%;
+            background: rgb(32, 185, 45);
+          }
+
+          .three {
+            width: 40%;
+            background: rgb(255, 214, 31);
+          }
+
+          .two {
+            width: 30%;
+            background: rgb(255, 95, 36);
+          }
+
+          .one {
+            width: 20%;
+            background: rgb(221, 54, 54);
+          }
+          * {
+              margin: 0;
+              padding: 0;
+            font-family: 'Bungee', cursive;
+            color: rgb(216, 170, 64);
+          }
+          h1 {
+            font-size: 90px;
+            line-height: 1em;
+            text-align: center;
+          }
+          h2{
+            text-align: center;
+          }
+
+
+    </style>
+</head>
+<body>
+    <h1> Tower of Hanoi </h1>
+    <div class="container">
+        <div class="dropzone" >
+            <div class="eight" data-weight="8" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="seven" data-weight="7" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="six" data-weight="6" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="five" data-weight="5" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="four" data-weight="4" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="three" data-weight="3" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="two" data-weight="2" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+            <div class="one" data-weight="1" id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)"></div>
+        </div>
+        <div class="dropzone" >
+            
+        </div>
+        <div class="dropzone last" id="last-zone">
+            
+        </div>
+    </div>
+    <h2>move_count:</h2><h2 id="h2_count">0</h2>
+    
+    
+    <script>
+        var dragged;
+        var move_count=0;
+        var h2_count = document.getElementById("h2_count");
+
+  /* events fired on the draggable target */
+  document.addEventListener("drag", function( event ) {
+
+  }, false);
+
+  document.addEventListener("dragstart", function( event ) {
+      // store a ref. on the dragged elem
+      if(event.target.parentNode.lastElementChild === event.target){
+        dragged = event.target;
+        // make it half transparent
+        event.target.style.opacity = .5;
+      }
+      
+  }, false);
+
+  document.addEventListener("dragend", function( event ) {
+      // reset the transparency
+      event.target.style.opacity = "";
+  }, false);
+
+  /* events fired on the drop targets */
+  document.addEventListener("dragover", function( event ) {
+      // prevent default to allow drop
+      event.preventDefault();
+  }, false);
+
+  document.addEventListener("dragenter", function( event ) {
+      // highlight potential drop target when the draggable element enters it
+      if ( event.target.classList.contains("dropzone") ) {
+          event.target.style.background = "rgb(235, 173, 118)";
+      }
+
+  }, false);
+
+  document.addEventListener("dragleave", function( event ) {
+      // reset background of potential drop target when the draggable element leaves it
+      if ( event.target.classList.contains("dropzone") ) {
+          event.target.style.background = "";
+      }
+
+  }, false);
+
+  document.addEventListener("drop", function( event ) {
+      
+        // prevent default action (open as link for some elements)
+      // move dragged elem to the selected drop target
+      if ( event.target.classList.contains("dropzone")) {
+          
+        event.target.style.background = "";
+        if(dragged){
+            if(event.target.childElementCount){
+                if(event.target.lastElementChild.dataset.weight > dragged.dataset.weight){
+                    dragged.parentNode.removeChild( dragged );
+                    event.target.appendChild( dragged );
+                }
+            }
+            else{
+                dragged.parentNode.removeChild( dragged );
+                    event.target.appendChild( dragged );
+            }
+            
+          move_count+=1;
+          h2_count.innerText=move_count;
+        }
+      dragged = null;
+      }
+      if(event.target.classList.contains('last') && (event.target.childElementCount===8)){
+        h2_count.innerText= move_count + '성공';
+      }
+  }, false);
+    </script>
+    <!--
+
+    https://feel5ny.github.io/2017/12/26/JS_08_1/
+    https://developer.mozilla.org/ko/docs/Web/API/Element
+    https://developer.mozilla.org/ko/docs/Learn/HTML/Howto/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%86%8D%EC%84%B1_%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+    https://doolyit.tistory.com/101
+    https://developer.mozilla.org/en-US/docs/Web/API/Document/drag_event
+    https://developer.mozilla.org/ko/docs/Web/API/HTML_%EB%93%9C%EB%9E%98%EA%B7%B8_%EC%95%A4_%EB%93%9C%EB%A1%AD_API
+    
+    -->
+</body>
+</html>

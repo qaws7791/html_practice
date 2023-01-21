@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        canvas { border: 1px solid black; }
+        p {display: block;}
+      </style>
+</head>
+<body onload="draw();">
+    <canvas id="tutorial" width="150" height="150"></canvas>
+    <p>fillRect(x, y, width, height)
+        색칠된 직사각형을 그립니다.</p>
+    <p>strokeRect(x, y, width, height)
+        직사각형 윤곽선을 그립니다.</p>
+    <p>clearRect(x, y, width, height)
+        특정 부분을 지우는 직사각형이며, 이 지워진 부분은 완전히 투명해집니다.</p>
+    <canvas id="tutorial2" width="150" height="150"></canvas>
+
+    <h4>경로그리기</h4>
+    <ol><li>경로 생성</li>
+    <li>경로 그리기</li>
+    <li>경로 채우기</li></ol>
+    <p>beginPath()
+        새로운 경로를 만듭니다. 경로가 생성됬다면, 이후 그리기 명령들은 경로를 구성하고 만드는데 사용하게 됩니다.</p>
+    <p>closePath()
+        현재 하위 경로의 시작 부분과 연결된 직선을 추가합니다.</p>
+    <p>stroke()
+        윤곽선을 이용하여 도형을 그립니다.</p>
+    <p>fill()
+        경로의 내부를 채워서 내부가 채워진 도형을 그립니다.</p>
+    <canvas id="tutorial3" width="150" height="150"></canvas>
+
+    <p>moveTo(x, y)
+        펜을  x와 y 로 지정된 좌표로 옮깁니다.</p>
+    <canvas id="tutorial4" width="150" height="150"></canvas>
+
+    <p>lineTo(x, y)
+        현재의 드로잉 위치에서 x와 y로 지정된 위치까지 선을 그립니다.</p>
+    <canvas id="tutorial5" width="150" height="150"></canvas>
+
+    <p>arc(x, y, radius, startAngle, endAngle, anticlockwise)
+        (x, y) 위치에 원점을 두면서, 반지름 r을 가지고,  startAngle 에서 시작하여 endAngle 에서 끝나며 주어진 anticlockwise 방향으로 향하는 (기본값은 시계방향 회전) 호를 그리게 됩니다.</p>
+    <p>arcTo(x1, y1, x2, y2, radius)
+        주어진 제어점들과 반지름으로 호를 그리고,  이전 점과 직선으로 연결합니다.</p>
+    <canvas id="tutorial6" width="150" height="150"></canvas>
+
+    <p>quadraticCurveTo(cp1x, cp1y, x, y)
+        cp1x 및 cp1y로 지정된 제어점을 사용하여 현재 펜의 위치에서 x와 y로 지정된 끝점까지 이차 베지어 곡선을 그립니다.</p>
+    <p>bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+        (cp1x, cp1y) 및 (cp2x, cp2y)로 지정된 제어점을 사용하여 현재 펜 위치에서 x 및 y로 지정된 끝점까지 삼차 베지어 곡선을 그립니다.</p>
+    <canvas id="tutorial7" width="150" height="150"></canvas>
+    <canvas id="tutorial8" width="150" height="150"></canvas>
+    <p>
+        Path2D()
+Path2D() 생성자는 새로운 Path2D 객체를 반환합니다. 선택적으로 다른 경로를 인수로 받거나(복사본을 생성), SVG 경로 데이터로 구성된 문자열을 받아서 객체로 반환합니다.
+    </p>
+    <canvas id="tutorial9" width="150" height="150"></canvas>
+
+
+    <script>
+        function draw(){
+            var canvas = document.getElementById('tutorial');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = "rgb(200,0,0)";
+                ctx.fillRect (10, 10, 50, 50);
+
+                ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+                ctx.fillRect (30, 30, 50, 50);
+
+                
+            }
+            var canvas = document.getElementById('tutorial2');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                
+
+                ctx.fillRect(25, 25, 100, 100); //100x100 직사각형 생성
+                ctx.clearRect(45, 45, 60, 60); //60x60 직사각형 제거
+                ctx.strokeRect(50, 50, 50, 50); // 50x50 윤곽선 직사각형 생성
+            }
+            var canvas = document.getElementById('tutorial3');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                ctx.beginPath();
+                ctx.moveTo(75, 50);
+                ctx.lineTo(100, 75);
+                ctx.lineTo(100, 25);
+                ctx.lineTo(80, 15);
+                ctx.fill();
+
+                
+            }
+            var canvas = document.getElementById('tutorial4');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                ctx.beginPath();
+                ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.fillStyle = "red";
+                ctx.moveTo(110, 75);
+                ctx.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.fillStyle = "orange";
+                ctx.moveTo(65, 65);
+                ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
+                
+                ctx.fill();
+                ctx.moveTo(95, 65);
+                ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
+                ctx.fill();
+                
+
+                
+            }
+            var canvas = document.getElementById('tutorial5');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                // Filled triangle
+                ctx.beginPath();
+                ctx.moveTo(25, 25);
+                ctx.lineTo(105, 25);
+                ctx.lineTo(25, 105);
+                ctx.fill();
+
+                // Stroked triangle
+                ctx.beginPath();
+                ctx.moveTo(125, 125);
+                ctx.lineTo(125, 45);
+                ctx.lineTo(45, 125);
+                ctx.closePath();
+                ctx.stroke();
+
+                
+            }
+            var canvas = document.getElementById('tutorial6');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 3; j++) {
+                      ctx.beginPath();
+                      var x = 25 + j * 50; // x coordinate
+                      var y = 25 + i * 50; // y coordinate
+                      var radius = 20; // Arc radius
+                      var startAngle = 0; // Starting point on circle
+                      var endAngle = Math.PI + (Math.PI * j) / 2; // End point on circle
+                      var anticlockwise = i % 2 == 0 ? false : true; // clockwise or anticlockwise
+              
+                      ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+              
+                      if (i > 1) {
+                        ctx.fill();
+                      } else {
+                        ctx.stroke();
+                      }
+                    }
+                  }
+
+                
+            }
+            var canvas = document.getElementById('tutorial7');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                // Quadratric curves example
+                ctx.beginPath();
+                ctx.moveTo(75, 25);
+                ctx.quadraticCurveTo(25, 25, 25, 62.5);
+                ctx.quadraticCurveTo(25, 100, 50, 100);
+                ctx.quadraticCurveTo(50, 120, 30, 125);
+                ctx.quadraticCurveTo(60, 120, 65, 100);
+                ctx.quadraticCurveTo(125, 100, 125, 62.5);
+                ctx.quadraticCurveTo(125, 25, 75, 25);
+                ctx.stroke();
+
+                
+            }
+            var canvas = document.getElementById('tutorial8');
+            if( canvas.getContext ){
+                var ctx = canvas.getContext('2d');
+
+                roundedRect(ctx, 12, 12, 150, 150, 15);
+                roundedRect(ctx, 19, 19, 150, 150, 9);
+                roundedRect(ctx, 53, 53, 49, 33, 10);
+                roundedRect(ctx, 53, 119, 49, 16, 6);
+                roundedRect(ctx, 135, 53, 49, 33, 10);
+                roundedRect(ctx, 135, 119, 25, 49, 10);
+
+                ctx.beginPath();
+                ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+                ctx.lineTo(31, 37);
+                ctx.fill();
+
+                for (var i = 0; i < 8; i++) {
+                ctx.fillRect(51 + i * 16, 35, 4, 4);
+                }
+
+                for (i = 0; i < 6; i++) {
+                ctx.fillRect(115, 51 + i * 16, 4, 4);
+                }
+
+                for (i = 0; i < 8; i++) {
+                ctx.fillRect(51 + i * 16, 99, 4, 4);
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(83, 116);
+                ctx.lineTo(83, 102);
+                ctx.bezierCurveTo(83, 94, 89, 88, 97, 88);
+                ctx.bezierCurveTo(105, 88, 111, 94, 111, 102);
+                ctx.lineTo(111, 116);
+                ctx.lineTo(106.333, 111.333);
+                ctx.lineTo(101.666, 116);
+                ctx.lineTo(97, 111.333);
+                ctx.lineTo(92.333, 116);
+                ctx.lineTo(87.666, 111.333);
+                ctx.lineTo(83, 116);
+                ctx.fill();
+
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.moveTo(91, 96);
+                ctx.bezierCurveTo(88, 96, 87, 99, 87, 101);
+                ctx.bezierCurveTo(87, 103, 88, 106, 91, 106);
+                ctx.bezierCurveTo(94, 106, 95, 103, 95, 101);
+                ctx.bezierCurveTo(95, 99, 94, 96, 91, 96);
+                ctx.moveTo(103, 96);
+                ctx.bezierCurveTo(100, 96, 99, 99, 99, 101);
+                ctx.bezierCurveTo(99, 103, 100, 106, 103, 106);
+                ctx.bezierCurveTo(106, 106, 107, 103, 107, 101);
+                ctx.bezierCurveTo(107, 99, 106, 96, 103, 96);
+                ctx.fill();
+
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+                ctx.fill();
+                
+            }
+
+            function roundedRect(ctx, x, y, width, height, radius) {
+                ctx.beginPath();
+                ctx.moveTo(x, y + radius);
+                ctx.lineTo(x, y + height - radius);
+                ctx.arcTo(x, y + height, x + radius, y + height, radius);
+                ctx.lineTo(x + width - radius, y + height);
+                ctx.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+                ctx.lineTo(x + width, y + radius);
+                ctx.arcTo(x + width, y, x + width - radius, y, radius);
+                ctx.lineTo(x + radius, y);
+                ctx.arcTo(x, y, x, y + radius, radius);
+                ctx.stroke();
+              }
+              var canvas = document.getElementById('tutorial9');
+              if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+            
+                var rectangle = new Path2D();
+                rectangle.rect(10, 10, 50, 50);
+            
+                var circle = new Path2D();
+                circle.moveTo(125, 35);
+                circle.arc(100, 35, 25, 0, 2 * Math.PI);
+            
+                ctx.stroke(rectangle);
+                ctx.fill(circle);
+              }
+        }
+        
+       
+
+    </script>
+</body>
+</html>

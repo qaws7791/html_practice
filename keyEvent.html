@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <style>
+#textBox
+        {
+            font-size: 7px;
+        }
+    </style>
+</head>
+<body>
+<input>
+<p id="textBox"></p>
+<button id="up" onclick="up()"> Size Up</button>
+<button id="down" onclick="down()"> Size Down</button>
+<script>
+    
+const input = document.querySelector('input');
+const textBox = document.getElementById('textBox');
+var textBox_fontSize= window.getComputedStyle(textBox,null).fontSize.slice(0,-2);
+input.onkeydown = logKey;
+
+function logKey(e) {
+    textBox.textContent += ` ${e.code}`;
+}
+function up(e) {
+    textBox_fontSize++
+    textBox.style.fontSize = textBox_fontSize+"px";
+}
+function down(e) {
+    textBox_fontSize--
+    textBox.style.fontSize = textBox_fontSize+"px";
+}  
+    
+</script>
+
+</body>
+</html>

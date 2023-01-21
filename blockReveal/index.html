@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Untitled Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Drag mouse in image.</h1>
+    <section id="section"></section>
+    <script>
+      const section = document.getElementById("section");
+
+      function createCard() {
+        var card = document.createElement("div");
+        var front = document.createElement("div");
+        var back = document.createElement("div");
+        card.classList.add("card");
+        front.classList.add("front");
+        back.classList.add("back");
+        card.appendChild(front);
+        card.appendChild(back);
+        return card;
+      }
+
+      for (let i = 0; i < 400; i++) {
+        section.appendChild(createCard());
+      }
+
+      var mousestate = 0;
+      $("body").mousedown(function () {
+        mousestate = 1;
+      });
+      $("body").mouseup(function () {
+        mousestate = 0;
+      });
+      $(".card").mouseenter(function () {
+        if (mousestate == 1) {
+          if ($(this).is(".x") === true) {
+            $(this).removeClass("x");
+          } else {
+            $(this).addClass("x");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
