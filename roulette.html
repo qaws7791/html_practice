@@ -26,8 +26,21 @@
       <h3>result number: <strong id="resultNumber"></strong></h3>
       <button id="buttonAdd" class="roul">Add</button>
       <button id="buttonDelete" class="roul">Delete</button>
+      <div id="rouletteItems"></div>
     </div>
     <script>
+      const colors = [
+          "#f94144",
+          "#f3722c",
+          "#f8961e",
+          "#f9844a",
+          "#f9c74f",
+          "#90be6d",
+          "#43aa8b",
+          "#4d908e",
+          "#577590",
+          "#277da1",
+        ];
       let labelRange;
       let range;
       let buttonRange;
@@ -40,6 +53,7 @@
       let buttonAdd;
       let buttonDelete;
 
+
       function load() {
         ctx = document.getElementById("myCanvas").getContext("2d");
         range = document.getElementById("myRange");
@@ -51,6 +65,8 @@
         inputContainer = document.getElementById("inputContainer");
         buttonAdd = document.getElementById("buttonAdd");
         buttonDelete = document.getElementById("buttonDelete");
+        rouletteContainer = document.getElementsByClassName("rouletteContainer")[0];
+        rouletteItems = document.getElementById("rouletteItems");
         roulette = new Roulette();
 
         roulette.initInput();
@@ -64,7 +80,7 @@
         changeInputState = function (bool) {
           let input_elements = document.getElementsByClassName("roul");
           for (let i = 0; i < input_elements.length; i++) {
-            console.log(input_elements[i]);
+            
             input_elements[i].disabled = bool;
           }
         };
@@ -78,18 +94,7 @@
         this.current_angle = 0;
         this.velocity = 0;
         this.items = ["1번", "2번", "3번", "4번"];
-        this.colors = [
-          "#f94144",
-          "#f3722c",
-          "#f8961e",
-          "#f9844a",
-          "#f9c74f",
-          "#90be6d",
-          "#43aa8b",
-          "#4d908e",
-          "#577590",
-          "#277da1",
-        ];
+        
 
         this.connectButton = function (button, rule) {
           let that = this;
@@ -98,7 +103,7 @@
               let len = that.items.length;
               if (len < 16) {
                 that.items.push((len + 1).toString() + "번");
-                document.body.appendChild(that.addInput(len));
+                rouletteItems.appendChild(that.addInput(len));
               }
             };
           } else if (rule === "Delete") {
@@ -109,7 +114,7 @@
                 return 0;
               }
               console.log(that.items.pop() + "번째 item Delete");
-              document.body.removeChild(document.body.lastChild);
+              rouletteItems.removeChild(rouletteItems.lastChild);
             };
           }
         };
@@ -133,7 +138,7 @@
         this.initInput = function () {
           let that = this;
           for (let i = 0; i < that.items.length; i++) {
-            document.body.appendChild(that.addInput(i));
+            rouletteItems.appendChild(that.addInput(i));
           }
         };
 
@@ -195,7 +200,7 @@
               (-90 + this.current_angle + angle * (i + 1)) * (Math.PI / 180),
               false
             );
-            ctx.fillStyle = this.colors[i % this.colors.length];
+            ctx.fillStyle = colors[i % colors.length];
             ctx.fill();
             ctx.closePath();
 
