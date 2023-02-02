@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: rosybrown;
+      }
+
+      .cube {
+        transform-origin: 50%;
+        position: relative;
+        width: 200px;
+        height: 400px;
+        transform-style: preserve-3d;
+        transform: perspective(300px) rotate3d(0, 1, 0, 0deg);
+        transition: all ease 2s;
+      }
+
+      .cube:hover {
+        transform: perspective(300px) rotate3d(0, 1, 0, 360deg);
+      }
+
+      .cube div {
+        position: absolute;
+        display: block;
+
+        color: rgb(15, 11, 11);
+      }
+
+      .cube .front {
+        width: 200px;
+        height: 400px;
+        background: rgb(141, 80, 0);
+        transform: translateZ(35px);
+      }
+
+      .cube .back {
+        width: 200px;
+        height: 400px;
+        background: rgba(0, 255, 0, 1);
+        color: saddlebrown;
+        transform: rotateY(180deg) translateZ(35px);
+      }
+
+      .cube .right {
+        width: 70px;
+        height: 400px;
+        background: rgba(196, 0, 0, 1);
+        transform: rotateY(90deg) translateZ(165px);
+      }
+
+      .cube .left {
+        width: 70px;
+        height: 400px;
+        background: rgba(0, 0, 196, 1);
+        transform: rotateY(-90deg) translateZ(35px);
+      }
+
+      .cube .top {
+        width: 200px;
+        height: 70px;
+        background: rgba(196, 196, 0, 1);
+        transform: rotateX(90deg) translateZ(35px);
+      }
+
+      .cube .bottom {
+        width: 200px;
+        height: 70px;
+        background: rgba(196, 0, 196, 1);
+        transform: rotateX(-90deg) translateZ(365px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cube">
+      <div class="top"><h1>Top</h1></div>
+      <div class="left"><h1>Left</h1></div>
+      <div class="right"><h1>Right</h1></div>
+      <div class="front"><h1>Front</h1></div>
+      <div class="back"><h1>Back</h1></div>
+      <div class="bottom"><h1>Bottom</h1></div>
+    </div>
+  </body>
+</html>

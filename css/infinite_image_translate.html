@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        display: flex;
+        align-items: center;
+        background: #000;
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .box2 {
+        display: flex;
+        align-items: center;
+        transition: transform 8s ease-in;
+        animation: bingle 7s linear infinite;
+      }
+
+      @keyframes bingle {
+        to {
+          transform: translateX(-2250px);
+        }
+        from {
+          transform: translateX(0);
+        }
+      }
+
+      .box span {
+        width: 400px;
+        height: 400px;
+        margin-right: 50px;
+      }
+
+      .box span img {
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="box2">
+          <span><img src="image_1.jpg" alt="" /></span>
+          <span><img src="image_2.jpg" alt="" /></span>
+          <span><img src="image_3.jpg" alt="" /></span>
+          <span><img src="image_4.jpg" alt="" /></span>
+          <span><img src="image_5.jpg" alt="" /></span>
+          <span><img src="image_1.jpg" alt="" /></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

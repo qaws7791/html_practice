@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        height: 100%;
+        font-size: 2rem;
+      }
+
+      @keyframes bingle-R {
+        to {
+          transform: rotateY(360deg);
+        }
+
+        from {
+          transform: rotateY(0deg);
+        }
+      }
+      @keyframes bingle-L {
+        to {
+          transform: rotateY(360deg);
+        }
+
+        from {
+          transform: rotateY(0deg);
+        }
+      }
+
+      .stage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: powderblue;
+        perspective: 600px;
+      }
+
+      .carousel {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        animation: bingle-R 6s linear infinite;
+        transition: all 5s ease-in;
+      }
+      .carousel:hover {
+        animation-play-state: paused;
+      }
+
+      .panel {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-style: preserve-3d;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .panel p {
+        display: block;
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+        transform: translateZ(50px);
+        background-color: rgba(187, 187, 187, 0);
+      }
+      .panel:nth-child(1) {
+        transform: rotateY(0deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2020/06/02/06/29/ryanair-5249631_960_720.jpg");
+        background-size: cover;
+      }
+      .panel:nth-child(2) {
+        transform: rotateY(60deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2010/12/05/space-shuttle-987_960_720.jpg");
+        background-size: cover;
+      }
+      .panel:nth-child(3) {
+        transform: rotateY(120deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2012/11/28/11/25/satellite-67718_960_720.jpg");
+        background-size: cover;
+      }
+      .panel:nth-child(4) {
+        transform: rotateY(180deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2016/09/14/20/03/airplane-1670266_960_720.jpg");
+        background-size: cover;
+      }
+      .panel:nth-child(5) {
+        transform: rotateY(240deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2016/05/05/02/35/hot-air-ballons-1373167_960_720.jpg");
+        background-size: cover;
+      }
+      .panel:nth-child(6) {
+        transform: rotateY(300deg) translateZ(173px);
+        background: url("https://cdn.pixabay.com/photo/2017/09/28/13/38/aircraft-2795557_960_720.jpg");
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="carousel">
+        <div class="panel">
+          <p>1 이곳은 패널입니다.</p>
+        </div>
+        <div class="panel">
+          <p>2 이곳은 패널입니다.</p>
+        </div>
+        <div class="panel">
+          <p>3 이곳은 패널입니다.</p>
+        </div>
+        <div class="panel">
+          <p>4 이곳은 패널입니다.</p>
+        </div>
+        <div class="panel">
+          <p>5 이곳은 패널입니다.</p>
+        </div>
+        <div class="panel">
+          <p>6 이곳은 패널입니다.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

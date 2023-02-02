@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 3000px;
+            width: 100%;
+        }
+
+        .sticky {
+            position: sticky;
+            top:0px;
+            height: 100vh;
+        }
+
+        .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-size: 3em;
+
+        }
+        
+        .content-black {
+            background-color: black;
+        }
+
+        .content-black h1 {
+            color:white;
+        }
+
+        .content-white {
+            background-color: white;
+            clip-path: inset(100% 0px 0px);
+        }
+
+        .gray {
+            color: gray;
+        }
+
+        .white {
+            color: white;
+        }
+
+        .white-half {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .content-red {
+            background-color: red;
+            clip-path: inset(100% 0px 0px);
+        }
+    </style>
+</head>
+<body>
+    <div class="stack sticky">
+        
+        <div class="content content-black">
+            <h1 class="white">여기는</h1>
+            <h1 class="white">칠흑.</h1>
+        </div>
+
+        <div class="content content-white"
+        data-0="clip-path: inset(100% 0px 0px);"
+        data-1000="clip-path: inset(0% 0px 0px);"
+        >
+        <h1>여기는</h1>
+        <h1>칠흑.<span class="gray">그리고 순백.</span></h1>
+        </div>
+
+        <div class="content content-red"
+        data-1000="clip-path: inset(100% 0px 0px);"
+        data-2000="clip-path: inset(0% 0px 0px);"
+        >
+            <h1 class="white-half">여기는</h1>
+            <h1 class="white-half">칠흑.<span>그리고 순백.</span></h1>
+            <h1 class="white">마지막 도발.</h1>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="skrollr.js"></script>
+	<script type="text/javascript">
+    skrollr.init();
+    </script>
+</body>
+</html>

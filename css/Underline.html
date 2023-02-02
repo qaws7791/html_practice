@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 70px;
+            font-weight: 100;
+        }
+
+        .font {
+            text-align: center;
+            color: #30313f;
+            line-height: 0.5em;
+        }
+
+        
+        .font em {
+            position: relative;
+            
+            font-style: normal;
+            color: #2d28c3;
+        }
+
+        .font em::before {
+            content: "";
+            height: 23px;
+            width: calc(100%);
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffa2b6;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="font">
+        <h1><em>내 돈</em>은 </h1>
+        <h1><em>내가 듣는 음악</em>에</h1>
+        <h1>갔으면 좋겠어</h1>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div { 
+            display: block;
+            width: 100%;
+            height: 2000px;
+            
+        }
+        .flex-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .one {
+            
+            background: palegoldenrod;
+        }
+
+        .two {
+            background: paleturquoise;
+            position: relative;
+            height: 4000px;
+        }
+
+        .two .move {
+            top: 200px;
+        }
+
+        .two .content {
+            z-index: 1;
+        }
+        .three {
+            background: palegreen;
+            height: 4000px;
+        }
+
+        .move {
+            position: relative;
+            top: 400px;
+            width: 200px;
+            height: 200px;
+            background: palevioletred;
+            
+        }
+
+        .move-scroll {
+            position: relative;
+            top: 400px;
+            width: 200px;
+            height: 200px;
+            background: palevioletred;
+        }
+        .move-big {
+            top: 400px;
+            width: 100%;
+            height: 800px;
+            background: palevioletred;
+            
+        }
+        @supports (position: sticky) or (position: -webkit-sticky) {
+            .sticky {
+                position: -webkit-sticky; /* 사파리 브라우저 지원 */
+                position: sticky;
+                top: 200px;
+            }
+          }
+        
+        .scrollValue {
+            z-index: 10
+            ;
+            display: block;
+            position:fixed;
+        }
+
+        .cube {
+            transform-origin:50%;
+            position: relative;
+            width: 200px;
+            height: 400px;
+            transform-style: preserve-3d;
+            transform: perspective(300px)  rotate3d(0, 1, 0, 150deg);
+            left: 200px;
+            top:100px;
+        }
+
+        .cube:hover {
+            transform: perspective(300px)  rotate3d(0, 1, 0, 210deg);
+        }
+
+        .cube div {
+            position: absolute;
+            display: block;
+            
+            color:rgb(15, 11, 11);
+        }
+
+        .cube .front {
+            width: 200px;
+            height: 400px;
+            background: rgb(141, 80, 0);
+            transform: translateZ(35px);
+            
+          }
+          
+          .cube .back {
+            width: 200px;
+            height: 400px;
+            background: rgba(0, 255, 0, 1);
+            color:saddlebrown;
+            transform: rotateY(180deg) translateZ(35px);
+          }
+          
+          .cube .right {
+            width: 70px;
+            height: 400px;
+            background: rgba(196, 0, 0, 1);
+            transform: rotateY(90deg) translateZ(165px) ;
+          }
+          
+          .cube .left {
+            width: 70px;
+            height: 400px;
+            background: rgba(0, 0, 196, 1);
+            transform: rotateY(-90deg) translateZ(35px);
+          }
+          
+          .cube .top {
+            width: 200px;
+            height: 70px;
+            background: rgba(196, 196, 0, 1);
+            transform: rotateX(90deg) translateZ(35px);
+          }
+          
+          .cube .bottom {
+            width: 200px;
+            height: 70px;
+            background: rgba(196, 0, 196, 1);
+            transform: rotateX(-90deg) translateZ(365px);
+          }
+
+          .four {
+              width: 5000px;
+              background-color: yellow;
+          }
+
+          .iconBox {
+              position: relative;
+              display: block;
+              margin-top: 500px;
+              width: 200px;
+              height: 200px;
+              left: 30%;
+              background: rgba(0, 0, 0, 0);
+              border: 3px solid white;
+              border-radius: 20px;
+          }
+          
+          .iconBox h1 {
+              position: relative;
+              text-align: center;
+              color: white;
+              top:35%;
+              transform: translateY(-50%);
+          }
+
+
+    </style>
+</head>
+<body>
+        <p class="scrollValue">
+        </p>
+    </div>
+    <div class="one flex-center">
+        <h1>One</h1>
+        <div class="move-scroll"
+        data-0="transform: matrix(1, 0, 0, 1, 0, 0); opacity: 0;"
+        data-1000="transform: matrix(0.75, 0, 0, 0.75, 0, 800); opacity: 1;"
+        >
+            <h1>Move</h1>
+        </div>
+    </div>
+    <div class="two flex-center">
+        <h1>Two</h1>
+        <div class="move-big sticky">
+            <h1>Move</h1>
+        </div>
+        <div class="content"
+        data-2000="opacity: 0;"
+        data-2150="opacity: 1;"
+        data-2400="opacity: 1;"
+        data-2700="opacity: 0;"
+        >
+            <h1>In ullamco nisi id aliquip. Voluptate culpa adipisicing occaecat sunt cillum laboris. Id amet pariatur id excepteur non.
+
+quip fugiat ipsum labore mollit ad esse cillum. Sunt culpa in anim nisi esse.</h1>
+        </div>
+    </div>
+    <div class="three">
+        <h1>Three</h1>
+        <div class="cube" data-6000="transform: perspective(300px) rotate3d(0, 1, 0, 150deg); top:100px;"
+        data-7000="transform: perspective(300px) rotate3d(0, 1, 0, 210deg); top:1200px; "
+        data-8000="transform: perspective(300px) rotate3d(0, 1, 0, 300deg); top:2400px; "
+        >
+
+        
+            <div class="top"><h1>Top</h1></div>
+            <div class="left"><h1>Left</h1></div>
+            <div class="right"><h1>Right</h1></div>
+            <div class="front">front</div>
+            <div class="back"><h1>Back</h1></div>
+            <div class="bottom"><h1>Bottom</h1></div>
+        </div>  
+    </div>
+    
+    <div class="four">
+        <h1>Four</h1>
+        <div class="iconBox sticky" 
+        data-10000="transform: matrix(1, 0, 0, 1, 0, 0); "
+        data-12000="transform: matrix(20, 0, 0, 20, 0, 0);"
+        
+        >
+           <h1>Icon</h1> 
+        </div>
+    </div>
+    <div class="two"></div>
+    <div class="three"></div>
+
+
+    <script type="text/javascript" src="skrollr.js"></script>
+	<script type="text/javascript">
+    skrollr.init();
+        var scrollValue = document.getElementsByClassName('scrollValue')[0];
+
+        window.onload = function() {
+            document.addEventListener('scroll', function(e) {
+                scrollValue.innerText = window.scrollY;
+            })
+        }
+	</script>
+</body>
+</html>
