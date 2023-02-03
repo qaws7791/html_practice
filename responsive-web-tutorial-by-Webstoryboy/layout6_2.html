@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        #wrap {width: 1200px; background-color: #F5EBFF;}
+        header {width: 100%; height: 100px; background-color: #F5EBFF;}
+        nav { width: 100%;  height: 100px;  background-color: #EBD6FF;}
+        aside {float: left;width: 33.3%; height: 400px; background-color: #B05CFF;}
+        .A { float: left; width: 66.6%; height: 400px; background-color: #A647FF;}
+        .A > article { width: 100%; height: 200px; background-color: #931FFF;}
+        .B {float: left; width: 100%;  height: 300px; background-color: #7E00F5;}
+        .B > article {float: left; width: 33.3%; height: 300px; background-color: #6900CC;}
+        .C {float: left; width: 100%; height: 300px; background-color: #5400A3; }
+        .C > div {float: left; margin: 5%;  width: 15%; height: 80%; background-color: #350066;}
+        footer {clear: both; width: 100%; height: 100px; background-color: #20003D;}
+        
+        @media (max-width:1220px) {
+            #wrap {width: 100%;}
+            .B > article {width: 50%;}
+            .B > article:nth-child(3) {display: none;}
+            .C > div {width: 20.3%;}
+            .C > div:nth-child(4) {display: none;}
+        }
+        
+        @media (max-width:768px) {
+            .B > article {float: none; width: 100%; height: 150px;}
+        }
+        
+        @media (max-width:480px) {
+            aside {float: none; width: 100%;}
+            .A {float: none; width: 100%;}
+            .C {clear: both; float: none; height: 900px;}
+            .C > div {float: none; width: 95%; height: 26.6%;}
+            
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <header>Header</header>
+    <nav>Nav</nav>
+    <aside>Aside</aside>
+    <section class="A">
+        <article class="A1">A1</article>
+        <article class="A2">A2</article>
+    </section>
+    <section class="B">
+        <article class="B1">B1</article>
+        <article class="B2">B2</article>
+        <article class="B3">B3</article>
+    </section>
+    <section class="C">
+        <div class="C1">C1</div>
+        <div class="C2">C2</div>
+        <div class="C3">C3</div>
+        <div class="C4">C4</div>
+    </section>
+    <footer>Footer</footer>
+</div>
+
+
+</body>
+</html>
