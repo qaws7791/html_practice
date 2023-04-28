@@ -21,15 +21,18 @@
   border-bottom: 1px solid #f3f3f3;
 }
 
-.btn {
+.btn,.link {
   background-color: #1976d2;
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-.btn:hover {
+.btn:hover,
+.link:hover {
   background-color: #1669bd;
   cursor: pointer;
 }
