@@ -21,13 +21,21 @@ function readExcel() {
           if (cell.t === "s" && colNum >= 9) {
             values.push(getHyperlinkAddress(cell));
           } else if (cell.t === "n" && colNum === 2) {
-            const dateString = XLSX.SSF.format(dateFmt, cell.v);
-            values.push(dateString);
+            const date = XLSX.SSF.parse_date_code(cell.v);
+            const timestamp = new Date(
+              date.y,
+              date.m - 1,
+              date.d,
+              date.H,
+              date.M,
+              date.S
+            ).getTime();
+            values.push(timestamp);
           } else {
             values.push(cell.v);
           }
         }
-
+        console.log(values);
         pushTable(values);
       }
     });
@@ -37,7 +45,7 @@ function readExcel() {
 
 function pushTable(rows) {
   let tr = document.createElement("tr");
-  const time = `${rows[1].slice(0, 10)} <br>${rows[1].slice(10)}`;
+  const time = `${new Date(rows[1])}`;
   const locList = rows[7].split(" ");
   const location = `
   ${locList.slice(0, 2).join(" ")} 
