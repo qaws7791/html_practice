@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        width: 300px;
+      "
+    >
+      <div>
+        <label for="number">Number To Sum:</label>
+        <input
+          type="range"
+          id="number"
+          name="number"
+          min="100"
+          value="1000"
+          max="100000"
+          step="100"
+        />
+        <div><span id="display_number"></span></div>
+      </div>
+      <fieldset style="border: 1px solid #ccc; border-radius: 10px">
+        <legend>using setInterval</legend>
+        <label for="progress">Sum progress:</label>
+        <progress value="0" max="100" id="progress"></progress>
+        <div><span id="display_progress">0</span>%</div>
+        <button onclick="onClickStart()">START</button>
+        <div>
+          Duration of time:
+          <p id="time"></p>
+        </div>
+      </fieldset>
+      <fieldset style="border: 1px solid #ccc; border-radius: 10px">
+        <legend>using requestAnimationFrame</legend>
+        <label for="progress2">Sum progress:</label>
+        <progress value="0" max="100" id="progress2"></progress>
+        <div><span id="display_progress2">0</span>%</div>
+        <button onclick="onClickStart2()">START</button>
+        <div>
+          Duration of time:
+          <p id="time2"></p>
+        </div>
+      </fieldset>
+      <fieldset style="border: 1px solid #ccc; border-radius: 10px" s>
+        <legend>using setTimeout</legend>
+        <label for="progress3">Sum progress:</label>
+        <progress value="0" max="100" id="progress3"></progress>
+        <div><span id="display_progress3">0</span>%</div>
+        <button onclick="onClickStart3()">START</button>
+        <div>
+          Duration of time:
+          <p id="time3"></p>
+        </div>
+      </fieldset>
+    </div>
+
+    <script>
+      const number = document.getElementById("number");
+      const progress = document.getElementById("progress");
+      const display_progress = document.getElementById("display_progress");
+      const progress2 = document.getElementById("progress2");
+      const display_progress2 = document.getElementById("display_progress2");
+      const progress3 = document.getElementById("progress3");
+      const display_progress3 = document.getElementById("display_progress3");
+      const display_number = document.getElementById("display_number");
+      const time = document.getElementById("time");
+      const time2 = document.getElementById("time2");
+      const time3 = document.getElementById("time3");
+      display_number.innerText = number.value;
+      number.oninput = function (e) {
+        display_number.innerText = e.target.value;
+      };
+
+      function* sumFromZero(n) {
+        let index = 0;
+        for (let i = 0; i <= n; i++) {
+          const result = Math.floor((i / n) * 100);
+          progress.value = result;
+          display_progress.innerText = result;
+          yield result;
+        }
+        return n;
+      }
+
+      function onClickStart() {
+        console.log("start");
+        const generator = sumFromZero(number.value);
+        const start = window.performance.now();
+        const setIntervalId = setInterval(() => {
+          const { done, value } = generator.next();
+          if (done) {
+            clearInterval(setIntervalId);
+            const end = window.performance.now();
+            time.innerText = `${end - start} ms`;
+            console.log("end");
+          }
+        }, 0);
+      }
+
+      function onClickStart2() {
+        console.log("start");
+        let i = 0;
+        const n = number.value;
+        const start = window.performance.now();
+        function updateProgress() {
+          const result = Math.floor((i / n) * 100);
+          progress2.value = result;
+          display_progress2.innerText = result;
+          if (i < n) {
+            i++;
+            requestAnimationFrame(updateProgress);
+          } else {
+            const end = window.performance.now();
+            time2.innerText = `${end - start} ms`;
+            console.log("end");
+          }
+        }
+        updateProgress();
+      }
+
+      function onClickStart3() {
+        const n = number.value;
+        const start = window.performance.now();
+        for (let i = 0; i < n; i++) {
+          setTimeout(() => {
+            const result = Math.floor((i / n) * 100);
+            progress3.value = result;
+            display_progress3.innerText = result;
+          }, 0);
+        }
+        const end = window.performance.now();
+        time3.innerText = `${end - start} ms`;
+        console.log(end - start);
+      }
+    </script>
+  </body>
+</html>

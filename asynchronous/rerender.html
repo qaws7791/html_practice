@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="list"></ul>
+    <button onclick="func()">func()</button>
+    <script async defer>
+      const list = document.getElementById("list");
+      for (let i = 0; i < 10; i++) {
+        const li = document.createElement("li");
+        list.appendChild(li);
+      }
+      function func() {
+        for (let i = 0; i < 100000; i++) {
+          // for (let j = 0; j < 100000; j++) {}
+          // if (i % 10000 === 0) {
+          //   const q = i / 10000;
+          //   console.log(q);
+          const index = i / 10000;
+          if (i % 10000 === 0) {
+            list.children[index].innerHTML = index;
+          }
+
+          setTimeout(() => {
+            console.log(index);
+          }, 0);
+        }
+        console.log("loop end");
+        // for (let i = 0; i < 100000; i++) {
+        //   for (let j = 0; j < 100000; j++) {}
+        // }
+        // console.log("loop end2");
+      }
+    </script>
+    <!-- <script async defer>
+      const list = document.getElementById("list");
+      for (let i = 0; i < 10; i++) {
+        const li = document.createElement("li");
+        list.appendChild(li);
+      }
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+      }
+      console.log("loop end");
+
+      list.children[0].innerHTML = 0;
+      console.log(0);
+      list.children[1].innerHTML = 1;
+      console.log(1);
+      list.children[2].innerHTML = 2;
+      console.log(2);
+      list.children[3].innerHTML = 3;
+      console.log(3);
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+      }
+      console.log("loop end2");
+    </script> -->
+    <!-- <script>
+      const list = document.getElementById("list");
+      for (let i = 0; i < 10; i++) {
+        const li = document.createElement("li");
+        list.appendChild(li);
+      }
+      function func() {
+        for (let i = 0; i < 10000; i++) {
+          for (let j = 0; j < 10000; j++) {}
+        }
+        console.log("loop end");
+
+        list.children[0].innerHTML = 0;
+        list.children[1].innerHTML = 1;
+        list.children[2].innerHTML = 2;
+        list.children[3].innerHTML = 3;
+        for (let i = 0; i < 10000; i++) {
+          for (let j = 0; j < 10000; j++) {}
+        }
+        console.log("loop end2");
+      }
+    </script> -->
+  </body>
+</html>

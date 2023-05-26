@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="list">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <button onclick="f1()">start</button>
+    <button onclick="updateList()">start</button>
+    <button onclick="func2()">start</button>
+
+    <script>
+      const list = document.getElementById("list");
+
+      // function resolveAfter2Seconds(x) {
+      //   return new Promise((resolve) => {
+      //     setTimeout(() => {
+      //       resolve(x + 1);
+      //     }, 0);
+      //   });
+      // }
+
+      // function resolveAfter2Seconds(x) {
+      //   return new Promise((resolve) => resolve(x + 1));
+      // }
+
+      function resolveAfter2Seconds(x) {
+        let i = 0;
+        for (; i < x; i++) {
+          for (let j = 0; j < x; j++) {}
+        }
+        return new Promise((resolve) => resolve(i));
+      }
+
+      // function changeHTML(index) {
+      //   return new Promise((resolve) => {
+      //     list.children[index].innerHTML = index;
+      //     resolve(index);
+      //   });
+      // }
+
+      let i = 0;
+      async function f1() {
+        if (i > 10) {
+          return;
+        }
+        i++;
+        const result = await resolveAfter2Seconds(i * 10000);
+        console.dir(i);
+        list.children[i - 1].innerHTML = i - 1;
+        setTimeout(() => f1(), 0);
+      }
+
+      function task(i) {
+        console.log(`task [${i}] start`);
+        delay();
+        console.log(`task [${i}] end`);
+        return new Promise((resolve) => setTimeout(resolve, 0));
+      }
+
+      async function updateList() {
+        const start = window.performance.now();
+        console.log("updateList start");
+        for (let i = 0; i < 10; i++) {
+          await task(i);
+          console.log("change ", i);
+          list.children[i].innerHTML = i;
+        }
+        console.log("updateList end");
+        const end = window.performance.now();
+        console.log(end - start);
+      }
+
+      function delay() {
+        for (let i = 0; i < 100000; i++) {
+          for (let j = 0; j < 100000; j++) {}
+        }
+        return;
+      }
+      function func2() {
+        console.log("start func2");
+        updateList();
+        console.log("end func2");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>document</title>
+  </head>
+  <button id="button" onclick="func()">click</button>
+  <button id="button" onclick="func2()">click</button>
+  <ul id="list"></ul>
+  <script>
+    const list = document.getElementById("list");
+    for (let i = 0; i < 10; i++) {
+      const li = document.createElement("li");
+      list.appendChild(li);
+    }
+    function func() {
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+
+        if (remain === 0) {
+          const index = i / 10000;
+          console.log(index);
+          list.children[index].innerHTML = index;
+          // window.requestAnimationFrame(() => {});
+        }
+      }
+    }
+    function func2() {
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[0].innerHTML = 0;
+      console.log(0);
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[1].innerHTML = 1;
+      console.log(0);
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[2].innerHTML = 2;
+      console.log(1);
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[3].innerHTML = 3;
+      console.log(2);
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[4].innerHTML = 4;
+      console.log(3);
+
+      for (let i = 0; i < 100000; i++) {
+        for (let j = 0; j < 100000; j++) {}
+        const remain = i % 10000;
+      }
+      list.children[5].innerHTML = 5;
+      console.log(4);
+    }
+  </script>
+  <body></body>
+</html>
