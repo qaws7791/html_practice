@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function init() {
+        class MyClass {
+          #PrivateStr;
+          constructor(str) {
+            this.#checkStr(str);
+            this.#PrivateStr = str;
+          }
+
+          printStr() {
+            console.log(`my string is ${this.#PrivateStr}`);
+          }
+
+          #checkStr(str) {
+            if (typeof str !== "string" || str.length === 0)
+              throw new TypeError("유효한 문자열이 아닙니다.");
+          }
+
+          changeStr(str) {
+            this.#checkStr(str);
+            this.#PrivateStr = str;
+          }
+
+          get PrivateStr() {
+            return this.#PrivateStr;
+          }
+        }
+        const A = new MyClass("foo");
+        console.dir(A);
+        console.log(A.PrivateStr);
+        // A.#checkStr(""); // Private field '#checkStr' must be declared in an enclosing class
+        // console.log(A.#PrivateStr); // Private field '#PrivateStr' must be declared in an enclosing class
+        const APrototype = Object.getPrototypeOf(A);
+        console.dir(APrototype); // 클래스 정보가 담긴 [Object]
+        console.dir(APrototype.printStr); // MyClass의 printStr()
+        console.dir(APrototype.constructor); // [class MyClass]
+        const B = new APrototype.constructor("baz"); //MyClass의 인스턴스 생성
+        console.dir(B.PrivateStr); // baz
+        B.printStr(); // my string is baz
+        console.dir(Object.getPrototypeOf(A) === Object.getPrototypeOf(B)); // 같은 MyClass을 가리키므로 true
+        console.dir(APrototype.constructor === MyClass);
+        console.dir(Object.getPrototypeOf(APrototype)); // 내장객체 Object
+        console.dir(Object.getPrototypeOf(Object.getPrototypeOf(APrototype))); // 내장객체 Object
+        APrototype.printABC = () => console.log("ABC"); // My class에 함수 추가
+        B.printABC(); // ABC
+      }
+      init();
+    </script>
+  </body>
+</html>

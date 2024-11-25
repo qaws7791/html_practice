@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Randomized Prim's Algorithm Maze</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="mazeCanvas" width="400" height="400"></canvas>
+    <button id="generateButton">생성</button>
+    <script>
+      // 캔버스 요소와 그래픽 컨텍스트 가져오기
+      var canvas = document.getElementById("mazeCanvas");
+      var ctx = canvas.getContext("2d");
+
+      // 셀의 크기 및 그리드 설정
+      var cellSize = 20;
+      var gridWidth = Math.floor(canvas.width / cellSize);
+      var gridHeight = Math.floor(canvas.height / cellSize);
+
+      // 초기 그리드 생성
+      var grid = [];
+      for (var i = 0; i < gridHeight; i++) {
+        grid[i] = [];
+        for (var j = 0; j < gridWidth; j++) {
+          grid[i][j] = 1;
+        }
+      }
+
+      // 미로 생성 함수
+      function generateMaze() {
+        // 미로 생성을 위한 초기 위치 설정
+        var startX = Math.floor(Math.random() * gridWidth);
+        var startY = Math.floor(Math.random() * gridHeight);
+
+        // 시작 위치를 포함하는 방문 여부 그리드 생성
+        var visited = [];
+        for (var i = 0; i < gridHeight; i++) {
+          visited[i] = [];
+          for (var j = 0; j < gridWidth; j++) {
+            visited[i][j] = false;
+          }
+        }
+
+        // 시작 위치를 방문한 상태로 설정
+        visited[startY][startX] = true;
+
+        // 주변 셀에 대한 이웃 목록 초기화
+        var neighbors = [
+          [startX, startY - 2, startX, startY - 1], // 위
+          [startX, startY + 2, startX, startY + 1], // 아래
+          [startX - 2, startY, startX - 1, startY], // 왼쪽
+          [startX + 2, startY, startX + 1, startY], // 오른쪽
+        ];
+
+        while (neighbors.length > 0) {
+          // 무작위 이웃 선택
+          var randomIndex = Math.floor(Math.random() * neighbors.length);
+          var neighbor = neighbors[randomIndex];
+          var x = neighbor[0];
+          var y = neighbor[1];
+          var nx = neighbor[2];
+          var ny = neighbor[3];
+
+          // 이웃 셀이 방문하지 않은 경우
+          if (!visited[y][x]) {
+            // 현재 셀과 이웃 셀 사이의 벽을 제거
+            grid[y][x] = 0;
+            grid[ny][nx] = 0;
+
+            // 이웃 셀을 방문한 상태로 설정
+            visited[y][x] = true;
+
+            // 이웃 셀의 주변 셀을 이웃 목록에 추가
+            if (ny - 2 >= 0 && !visited[ny - 2][nx]) {
+              neighbors.push([nx, ny - 2, nx, ny - 1]); // 위
+            }
+            if (ny + 2 < gridHeight && !visited[ny + 2][nx]) {
+              neighbors.push([nx, ny + 2, nx, ny + 1]); // 아래
+            }
+            if (nx - 2 >= 0 && !visited[ny][nx - 2]) {
+              neighbors.push([nx - 2, ny, nx - 1, ny]); // 왼쪽
+            }
+            if (nx + 2 < gridWidth && !visited[ny][nx + 2]) {
+              neighbors.push([nx + 2, ny, nx + 1, ny]); // 오른쪽
+            }
+          }
+
+          // 선택한 이웃을 이웃 목록에서 제거
+          neighbors.splice(randomIndex, 1);
+        }
+
+        // 미로 그리기
+        drawMaze();
+      }
+
+      // 미로를 그리는 함수
+      function drawMaze() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < gridHeight; i++) {
+          for (var j = 0; j < gridWidth; j++) {
+            if (grid[i][j] === 1) {
+              ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+            }
+          }
+        }
+      }
+
+      // 미로 생성 버튼 클릭 시 미로 생성
+      document
+        .getElementById("generateButton")
+        .addEventListener("click", generateMaze);
+
+      // 초기 미로 그리기
+      drawMaze();
+    </script>
+  </body>
+</html>

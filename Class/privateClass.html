@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <ul id="list"></ul>
+  <body>
+    <script>
+      const $list = document.getElementById("list");
+
+      class Box {
+        constructor(width, height) {
+          this.checkLength(width);
+          this.width = width;
+          this.height = height;
+        }
+        checkLength(...lengths) {
+          for (const length of lengths) {
+            if (length <= 0) throw RangeError("잘못된 값입니다.");
+          }
+        }
+        printArea() {
+          console.log(
+            `${this.width} * ${this.height} = ${this.width * this.height}`
+          );
+        }
+      }
+      const box1 = new Box(5, 5);
+      console.dir(box1);
+      box1.printArea();
+      console.dir(Object.getPrototypeOf(box1));
+    </script>
+  </body>
+</html>
